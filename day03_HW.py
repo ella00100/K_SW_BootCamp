@@ -1,5 +1,4 @@
-#prob5.6
-subject = ['duck','gourd','spitz']
+#prob6.1
 
-for i in range(0,3):
-    print(f'{subject[i].capitalize()}y Mc{subject[i].capitalize()}face')
+for k in [3, 2, 1, 0]:
+    print(k)
