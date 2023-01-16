@@ -1,6 +1,19 @@
-#prob 5.3
+#prob 5.4 & 5.5
+salutation = 'Mr.'
+name = 'jake'
+product = 'chocolate'
+verbed = 'delayed'
+room  = 'house'
+animals = 'animals'
+amount = '10'
+percent = '30'
+spokesman = 'Ella'
+job_title = 'Marketing Manager'
 
-print("My kitty cat likes %s, "
-      "\nMy kitty cat like %s,"
-      "\nMy kitty cat fell on his %s And now thinks he's a %s"
-      % ('roast beef', 'ham', 'head', 'clam'))
+letter = print('  Dear {} {},\n\n'.format(salutation,name),
+               ' Thank you for your letter. We are sorry that our {} {} in your {}.'.format(product,verbed,room),
+               'Please note that it should never be used in a {}, especially near any {}.\n\n'.format(room,animals),
+               ' Send us your receipt and {} for shipping and handling'.format(amount),
+               'We will send you another {} that, in out tests, is {}% less likely to have {}\n\n'.format(product,percent,verbed),
+               ' Thank you for your support.\n  Sincerely,\n  {}\n  {}'.format(spokesman,job_title)
+)
