@@ -1,14 +1,17 @@
-song = """When an eel grabs your arm, 
-And it cause great harm,
-That's -a moray"""
+#prob 5.2
+questions = [
+    "We don't serve string around here. Are you a String?",
+    "What is said on Father's Day in the forest?",
+    "What makes the sound 'Sis! Boom! Bah!'?"
+]
 
-#방법 1
-print(song.replace(' m',' M'))
+answers = [
+    "An exploding sheep.",
+    "No, I'm frayed knot.",
+    "'Pop!' goes the weasel."
+]
 
-song = """When an eel grabs your arm, 
-And it cause great harm,
-That's -a moray"""
-
-#방법 2
-idx = song.rfind('m')
-print(song[0:idx]+song[idx].upper()+song[idx+1:])
+i=0
+while i<3:
+    print('Q: ',questions[i], '\nA: ',answers[i])
+    i = i+1
