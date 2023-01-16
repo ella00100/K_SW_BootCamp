@@ -1,4 +1,15 @@
-#prob6.1
+#prob 6.2
 
-for k in [3, 2, 1, 0]:
-    print(k)
+guess_me = 7
+number = 1
+
+while True:
+    if guess_me > number:
+        print('too low')
+    elif guess_me == number:
+        print('found it!')
+        break
+    else:
+        print('oops')
+        break
+    number += 1
