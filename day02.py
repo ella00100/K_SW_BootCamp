@@ -1,17 +1,8 @@
-import random
+a=[]
+print(bool(a)) #a가 비어있으니 0 => False출력
 
-limits = 20
-tweets = "pass" * random.randint(1,10)
-diff = limits - len(tweets)
-if diff >=0:
-    print(tweets)
-else:
-    print(f"제한 글자 수 {abs(diff)}초과")
+a.append(5)
+print(bool(a)) #a가 0이 아니므로 1 => True출력
 
-
-vowels = 'aeiou'
-letter = 'u'
-if letter in vowels:
-    print(f'{letter} in vowels')
-else:
-    print(f'{letter} not in vowels')
+print(bool(set(a)))
+print(bool(dict()))
