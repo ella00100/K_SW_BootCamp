@@ -1,17 +1,17 @@
-#2진수 = 0b, 16진수 = 0x, 8진수 = 0o
-number = 0b10011010
-print(number)
-number = 0x9a
-print(number)
-number = 0o232
-print(number)
+import random
 
-#2진수 = bin , 16진수 = hex, 8진수 = oct
-value=154
-print(bin(value))
-print(hex(value))
-print(oct(value))
+limits = 20
+tweets = "pass" * random.randint(1,10)
+diff = limits - len(tweets)
+if diff >=0:
+    print(tweets)
+else:
+    print(f"제한 글자 수 {abs(diff)}초과")
 
-#ord는 ascii code
-print(ord(" "))
-print(hex(ord(" ")))
+
+vowels = 'aeiou'
+letter = 'u'
+if letter in vowels:
+    print(f'{letter} in vowels')
+else:
+    print(f'{letter} not in vowels')
