@@ -1,3 +1,3 @@
-#prob 8.10
-squares = {k : k*k for k in range(10)}
-print(squares)
+#prob 8.11
+odd_set = {number for number in range(10) if number %2 == 1}
+print(odd_set)
