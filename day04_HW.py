@@ -1,4 +1,5 @@
-#prob 8.12
-gen = (x for x in range(10))
-for x in gen:
-    print(f'Got{x}', end=' ')
+#prob 8.13
+key = ('optimist', 'pessimist', 'troll')
+value = ('The glass is half full', 'The glass is half empty', 'How did you get a glass?')
+dic = dict(zip(key,value))
+print(dic)
