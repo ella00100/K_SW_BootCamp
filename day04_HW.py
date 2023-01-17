@@ -1,14 +1,9 @@
-#prob 7.4
-things = ["mozzarella", "cindereela", "salmonella"]
+#prob 7.8
+surprise = ["Groucho", "Chico", "Harpo"]
 
-#prob 7.5
-things[1] = things[1].title()
-print(things)
-
-#prob 7.6
-things[0] = things[0].upper()
-print(things)
-
-#prob 7.7
-print(f'{things.pop()} is delated')
-print(things)
+#prob 7.9
+surprise[-1] = surprise[-1].lower()
+harpo = list(surprise[-1])
+rv_harpo = ''.join(harpo[::-1])
+surprise[-1] = rv_harpo.title()
+print(surprise)
