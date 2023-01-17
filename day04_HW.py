@@ -1,19 +1,22 @@
-#prob 7.11
-start1 = ['fee', 'fie','foe']
-rhymes = [
-    ("flop", "get a mop"),
-    ("fope", "turn the rope"),
-    ("fa", "get your ma"),
-    ("fudge", "call the judge"),
-    ("fat", "pet the call"),
-    ("fog", "walk the dog"),
-    ("fun", "say we're done"),
-    ]
-start2 = "Someone better"
+#prob 8.1
+e2f = dict(dog='chien',
+           cat = 'chat',
+           walrus = 'morse')
 
-for k in range(len(rhymes)):
-    for i in range(len(start1)):
-        start1[i] = start1[i].title()
-        print(f'{start1[i]}!', end = ' ')
-    print(f'{rhymes[k][0].title()}!')
-    print(f'{start2} {rhymes[k][1]}.')
+#prob 8.2
+print(e2f["walrus"])
+
+#prob 8.3
+f2e = {}
+for k, v in e2f.items():
+    f2e.update({v:k})
+print(f2e)
+
+#prob 8.4
+for k, v in e2f.items():
+    if v =='chien':
+        print(k)
+
+#prob 8.5
+for k in e2f:
+    print(k, end = ' ')
