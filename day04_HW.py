@@ -1,3 +1,4 @@
-#prob 8.11
-odd_set = {number for number in range(10) if number %2 == 1}
-print(odd_set)
+#prob 8.12
+gen = (x for x in range(10))
+for x in gen:
+    print(f'Got{x}', end=' ')
