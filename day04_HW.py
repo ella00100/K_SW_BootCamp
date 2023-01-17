@@ -1,12 +1,14 @@
-#prob 7.1
-birth = 1999
-year_lists = []
-for i in range(5):
-    year_lists.append(birth + i)
-print (year_lists)
+#prob 7.4
+things = ["mozzarella", "cindereela", "salmonella"]
 
-#prob 7.2
-print(year_lists[3])
+#prob 7.5
+things[1] = things[1].title()
+print(things)
 
-#prob 7.3
-print(year_lists[-1])
+#prob 7.6
+things[0] = things[0].upper()
+print(things)
+
+#prob 7.7
+print(f'{things.pop()} is delated')
+print(things)
