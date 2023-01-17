@@ -1,22 +1,18 @@
-#prob 8.1
-e2f = dict(dog='chien',
-           cat = 'chat',
-           walrus = 'morse')
+#prob 8.6
+life = {'animals' : {'cats': 'Henri', 'octopi': 'Grumpy', 'emus': 'Lucy'},
+        'plants': {},
+        'other' : {}
+        }
 
-#prob 8.2
-print(e2f["walrus"])
+#prob 8.7
+for k in life:
+    print(k, end= ' ')
+print("\n")
 
-#prob 8.3
-f2e = {}
-for k, v in e2f.items():
-    f2e.update({v:k})
-print(f2e)
+#prob 8.8
+for k in life['animals']:
+    print(k, end= ' ')
+print("\n")
 
-#prob 8.4
-for k, v in e2f.items():
-    if v =='chien':
-        print(k)
-
-#prob 8.5
-for k in e2f:
-    print(k, end = ' ')
+#prob 8.9
+print(life['animals']['cats'])
