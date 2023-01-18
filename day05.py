@@ -1,24 +1,35 @@
-import random
-def calculate_fee3(args):   #매개변수를 리스트로 받음
-    """
-    놀이공원 요금 계산 프로그램 vr.3
-    :param args: ages in list
-    :return: [total fee, adults, children]  #반환 값 리스트로
-    """
-    total_fee= 0
-    adults = 0
-    children = 0
-    for age in args:
-        if 19 <= age:
-            adults += 1
-            total_fee = total_fee + 10000
-        else:
-            children += 1
-            total_fee = total_fee + 3000
-    return dict(total_c=len(args), adult_c = adults, child_c =children, total_f = total_fee)
+#function
 
-no_of_visitor = int(input("몇 분이세요?"))
-ages = [random.randint(1,60) for age in range(no_of_visitor)]
-results = dict(calculate_fee3(ages))
+def sixty():
+    """
+    숫자 60을 출력하는 함수
+    """
+    print(60)
 
-print(f'총 {results["total_c"]}분이서 방문하셨고 어른 {results["adult_c"]}명, 아이 {results["child_c"]}명, 총 요금은 {results["total_f"]}원 입니다.')
+def call_func(f):
+    """
+    매개변수로 함수를 넘겨받아 실행
+    :param f: 매개변수는 function(함수)
+    :return:
+    """
+    f()
+
+call_func(sixty)
+
+def substract(n1,n2):
+    """
+    n1-n2 빼기 연산을 실행하는 함수
+    """
+    print(n1-n2)
+
+def run_fun(f, arg1, arg2):
+    """
+    함수를 매개변수로 받아 함수 안에서 함수를 실행
+    :param f: 실행할 함수
+    :param arg1: 매개변수 1
+    :param arg2: 매개변수 2
+    :return:
+    """
+    f(arg1,arg2)
+
+run_fun(substract,10,5)
