@@ -1,6 +1,10 @@
-# prob 9.1
+# prob 9.2
 
-def good():
-    return ['Harry','Ron','Hermione']
+def get_odd():
+    return (odd_num for odd_num in range(1,10,2))
 
-print(good())
+count = 0
+for i in get_odd():
+    count += 1
+    if count == 3:
+        print(i)
