@@ -1,35 +1,27 @@
-#function
+#closures
 
-def sixty():
-    """
-    숫자 60을 출력하는 함수
-    """
-    print(60)
+def calculate():
+    x=1
+    y=2
 
-def call_func(f):
-    """
-    매개변수로 함수를 넘겨받아 실행
-    :param f: 매개변수는 function(함수)
-    :return:
-    """
-    f()
+    def add_sub(n):
+        return x + n + y
 
-call_func(sixty)
+    return add_sub
 
-def substract(n1,n2):
-    """
-    n1-n2 빼기 연산을 실행하는 함수
-    """
-    print(n1-n2)
+c1 = calculate()
+for i in range(5):
+    print(c1(i))
 
-def run_fun(f, arg1, arg2):
-    """
-    함수를 매개변수로 받아 함수 안에서 함수를 실행
-    :param f: 실행할 함수
-    :param arg1: 매개변수 1
-    :param arg2: 매개변수 2
-    :return:
-    """
-    f(arg1,arg2)
+def calculate2():
+    x=1
+    y=2
+    def add_sub(n):
+        nonlocal x
+        x = 11
+        return x + n - y
+    return add_sub
 
-run_fun(substract,10,5)
+c2 = calculate2()
+for i in range(5):
+    print(c2(i))
