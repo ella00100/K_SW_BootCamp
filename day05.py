@@ -1,27 +1,29 @@
-#closures
+#Lambda
 
-def calculate():
-    x=1
-    y=2
+#기본 함수 사용
+import random
 
-    def add_sub(n):
-        return x + n + y
+def process(no_list, f):
+    for n in no_list:
+        print(f(n))
 
-    return add_sub
+def squares(n):
+    """
+    제곱 함수
+    :param n: 정수(integer)
+    :return:  제곱 수 (squares)
+    """
+    return n*n
 
-c1 = calculate()
-for i in range(5):
-    print(c1(i))
+numbers = [random.randint(1,100) for i in range(5)]
+print(numbers)
+process(numbers,squares)
 
-def calculate2():
-    x=1
-    y=2
-    def add_sub(n):
-        nonlocal x
-        x = 11
-        return x + n - y
-    return add_sub
+#Lambda 사용
+def process_l(no_list,f):
+    for n in no_list:
+        print(f(n))
 
-c2 = calculate2()
-for i in range(5):
-    print(c2(i))
+numbers = [random.randint(1,100) for i in range(5)]
+print(numbers)
+process(numbers, lambda x: x*x)
