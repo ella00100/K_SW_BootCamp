@@ -1,26 +1,34 @@
-def div_calc(a,b):
-    """
-    나누기 연산 함수
-    :param a: 분자
-    :param b: 분모
-    :return: 계산 결과
-    """
-    return a/b
-print(div_calc(15,3))
+#class
 
-try:
-    expr = input("분자 분모를 입력해 주세요(띄어쓰기로 구분): ").split()
-    print(int(expr[0]) /int(expr[1]))
-    # print(int(expr[4])) index error
-except ValueError as err:
-    print(f"숫자만 입력 가능합니다.({err})")
-except ZeroDivisionError as err:
-    print(f"분모에 0이 올 수 없습니다. ({err})")
-except IndexError as err:
-    print(f"입력 값의 범위에 문제가 있습니다. ({err})")
-except Exception as other:
-    print(f"알 수 없는 오류가 발생했습니다. ({other})")
-else: #예외가 발생하지 않았을 때 동작
-    print('프로그램이 정상적으로 작동했습니다.', end = '\n')
-finally: #예외 발생 여부와 관계없이 동작
-    print('프로그램 종료')
+# class Pokemon:
+#     def __init__(self): #객체 생성 시 동작
+#         print("포켓몬 객체 생성됨")
+#
+# p1 = Pokemon()
+# p2 = Pokemon()
+# print(p1,p2)
+
+class Pokemon:
+    def __init__(self,name,owner,skills):
+        self.name = name
+        self.owner = owner
+        self.skills = skills.split('/')
+        print(f'{name} 생성됨')
+
+    def info(self):  #멤버 함수
+        print(f'{self.owner}의 포켓몬은 {self.name}입니다')
+        for skill in self.skills:
+            print(skill)
+
+p1 = Pokemon("피카츄",'한지우','50만 볼트/100만 볼트')
+p2 = Pokemon("꼬부기",'오바람','고속스핀/거품물기/몸통박치기/하이드로펌프')
+
+p1.info()
+print(p2.skills)
+
+#상속
+class Pikachu(Pokemon):
+    pass
+
+pi1 = Pikachu("피카츄","덴트","번개")
+pi1.info() #다른 정의 없이 부모의 매서드를 사용가능
