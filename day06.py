@@ -1,20 +1,18 @@
-#generator
+#decorator
 
-def a():      #generator
-    yield 1
-    yield 2   #값을 저장하지 않으므로 2로 변화
-    yield 3
+def sub_int(x,y):
+    return x - y
 
-def b():      #nomal function
-    return 1  #stop here
-    return 2
-    return 3
+def document_it(func): #decorator 생성
+    def new_function(*args, **kwargs):
+        print('실행 중인 함수: ', func.__name__)
+        print('위치 기반 인수들: ', args)
+        print('키워드 기반 인수들:', kwargs)
+        result = func(*args, **kwargs)
+        print('실행 결과: ', result)
+        return result
+    return new_function
 
-c = a()      #generator 객체 생성
-for x in c:
-    print(x) #a를 돌면서 1,2,3 차례대로 출력
-
-for x in c:
-    print(x) #generator는 한번 순회하면 값이 사라지므로 아무런 출력 x
-
-print(b())   # 1만 출력하고 정지
+print(sub_int(7,3))
+info_sub_int = document_it(sub_int)
+info_sub_int(7,3)
