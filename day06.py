@@ -1,25 +1,25 @@
-#namespace
-g = 1   #전역변수
+def factorial_iter(n):
+    """
+    반복문을 이용한 팩터리얼 함수
+    :param n: n!
+    :return:  integer 팩토리얼 계산 결과 값
+    """
+    result = 1
+    for k in range(1,n+1):
+        result = result * k
+    return  result
 
-def print_global():
-    print(g)    # g가 전역변수로 이미 선언되어 있으므로
-                # 함수 내에서 정의하지 않아도 사용 가능
+def fatorial_recu(n):
+    """
+    재귀 함수를 이용한 팩토리얼 함수
+    :param n: n!
+    :return:  자기 자신을 호출 또는 1
+    """
+    if n == 1:
+        return 1
+    else:
+        return fatorial_recu(n-1)*n
 
-print_global()  # 전역변수 g를 print 하는 함수 => 1 출력
-print(g)        # 전역변수 g를 print => 1 출력
 
-def print_local():
-    g=2         # 지역변수 g값을 2로 할당
-    print(g)
-
-print_local()   # 지역변수 g를 출력하는 함수 => 2 출력
-print(g)        # 전역변수 g는 변하지 않았음 = > 1 출력
-
-def change_print_global():
-    global g    # 전역변수 g를 불러옴
-    g=3         # 전역변수 g 값을 3으로 변경
-    print(g)
-
-change_print_global() # 3 출력
-print(g)              # 전역변수 자체가 바뀌었으므로 3출력
-
+print(factorial_iter(5))
+print(fatorial_recu(5))
