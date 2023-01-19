@@ -1,28 +1,25 @@
-#decorator
+#namespace
+g = 1   #전역변수
 
-def sub_int(x,y):
-    return x - y
+def print_global():
+    print(g)    # g가 전역변수로 이미 선언되어 있으므로
+                # 함수 내에서 정의하지 않아도 사용 가능
 
-def document_it(func): #decorator 생성
-    def new_function(*args, **kwargs):
-        print('실행 중인 함수: ', func.__name__)
-        print('위치 기반 인수들: ', args)
-        print('키워드 기반 인수들:', kwargs)
-        result = func(*args, **kwargs)
-        print('실행 결과: ', result)
-        return result
-    return new_function
+print_global()  # 전역변수 g를 print 하는 함수 => 1 출력
+print(g)        # 전역변수 g를 print => 1 출력
 
-print(sub_int(7,3))
-info_sub_int = document_it(sub_int)        #수동할당
-info_sub_int(7,3)
+def print_local():
+    g=2         # 지역변수 g값을 2로 할당
+    print(g)
 
-@document_it    #자동할당
-def sub_int(x,y):
-    return x - y
-@document_it
-def squrare(n):
-    return n*n
+print_local()   # 지역변수 g를 출력하는 함수 => 2 출력
+print(g)        # 전역변수 g는 변하지 않았음 = > 1 출력
 
-print(sub_int(7,3))
-print(squrare(5))
+def change_print_global():
+    global g    # 전역변수 g를 불러옴
+    g=3         # 전역변수 g 값을 3으로 변경
+    print(g)
+
+change_print_global() # 3 출력
+print(g)              # 전역변수 자체가 바뀌었으므로 3출력
+
