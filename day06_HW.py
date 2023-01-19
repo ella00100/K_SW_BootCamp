@@ -1,16 +1,11 @@
-# prob 9.3
+# prob 9.4
 
-def test(func):
-    def new_func(*args):
-        print("start",end = '\n')
-        result = func(*args)
-        print(result)
-        print("end", end = '\n')
-        return result
-    return new_func
+class OopsException(Exception):
+    pass
 
-@test
-def sum(a,b):
-    return a + b
-
-sum(3,5)
+Trans = ['bus', 'subway', 'taxi']
+ask = input('교통수단 입력 : ')
+if ask not in Trans:
+    raise OopsException(Trans)
+else:
+    print("정상 종료")
