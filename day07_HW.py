@@ -1,7 +1,8 @@
 # prob 10.2
-class Thing2():
-    def __init__(self,letters):
-        self.letters = letters
 
-ex = Thing2('abc')
+class Thing2():
+    pass
+
+ex = Thing2()
+ex.letters = 'abc'
 print(ex.letters)
