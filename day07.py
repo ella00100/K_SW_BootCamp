@@ -1,41 +1,26 @@
-#inherit
+#다중상속
 
-class Pokemon:
-    def __init__(self,owner,skills):
-        self.owner = owner
-        self.skills = skills.split('/')
-        print(f'포켓몬 생성 :', end = ' ' )
+class Animal:   #할아버지
+    def says(self):
+        return "I speak!"
 
-    def info(self):
-        print(f'{self.owner}의 포켓몬이 사용 가능한 스킬 : {self.skills}')
+class Horse(Animal):
+    def says(self):
+        return 'Neigh!'
 
-    def attack(self,idx):
-        print(f'{self.skills[idx]} 공격 개시!')
-#상속
-class Pikachu(Pokemon):
-    def __init__(self,owner,skills):
-        super().__init__(owner, skills)  #부모 클래스 호출 "포켓몬 생성 : "출력
-        self.name = "꼬부기"
-        print(f'{self.name}')
+class Donkey(Animal):
+    def says(self):
+        return 'Hee-Haw!'
+    pass
 
-    def attack(self, idx):    #부모의 매서드 attck 오버 라이트  => 자식 Pikachu만 가짐
-        print(f'나와라 {self.name}! {self.skills[idx]} 공격 개시!')
+class Mule(Donkey, Horse):   #Donkey가 우선순위
+    pass
 
-class Ggoboogi(Pokemon):
-    def __init__(self,owner,skills):
-        super().__init__(owner,skills)
-        self.name = "꼬부기"
-        print(f'{self.name}')
+class Hinny(Horse, Donkey): #Horse가 우선순위
+    pass
 
-    def attack(self, idx):
-        print(f'나와라 {self.name}! {self.skills[idx]} 공격 개시!')
+mule = Mule()
+hinny = Hinny()
 
-    def swim(self):    #꼬부기만 가지는 매서드
-        print("음↓ 파↑ 음↓ 파↑")
-
-pi1 = Pikachu("한지우","100만 볼트/번개")
-pi1.info() #부모 클래스의 매서드 사용
-
-goo1 = Ggoboogi("오바람","고속 스핀/몸통 박치기")
-goo1.attack(1)
-goo1.swim()
+print(mule.says())
+print(hinny.says())
