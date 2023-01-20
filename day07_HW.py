@@ -1,10 +1,7 @@
-# prob 10.1
+# prob 10.2
+class Thing2():
+    def __init__(self,letters):
+        self.letters = letters
 
-class Thing():
-    pass
-
-example = Thing()
-
-print(Thing())
-print(example)
-#출력 값 다름
+ex = Thing2('abc')
+print(ex.letters)
