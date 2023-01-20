@@ -1,22 +1,24 @@
-class PrettyMixin:
-    def time_print(self):
-        import datetime
-        print(datetime.date.today())
+#getter/setter 매서드
 
-    def dump(self):
-        import pprint
-        pprint.pprint(vars(self))
+class Duck():
+    def __init__(self,input_name):
+        self.hidden_name = input_name
 
+    def get_name(self):
+        print('inside the getter')
+        return self.hidden_name
 
-class Thing(PrettyMixin):
-    pass
+    def set_name(self, input_name):
+        print('inside the setter')
+        self.hidden_name = input_name
 
+    name = property(get_name, set_name)
 
-t = Thing()
-t.time_print()
-t.name = "Nyarlathotep"
-t.feature = "ichor"
-t.age = "eldritch"
-t.gender = "female"
-t.gender = "male"
-t.dump()
+don = Duck('Donald')
+print(don.get_name())
+
+don.name='Donna'
+print(don.name)
+
+don.set_name('InDuck')
+print(don.name)
