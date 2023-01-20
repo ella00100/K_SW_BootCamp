@@ -1,15 +1,14 @@
-#prob 10.5
-
-el_dict = dict( name = 'Hydrogen',
-                symbol = 'H',
-                number = 1
-                )
+#prob 10.6
 
 class Element():
-    def __init__(self, dic):
-        self.name = dic['name']
-        self.symbol = dic['symbol']
-        self.number = dic['number']
+    def __init__(self, name, symbol, number):
+        self.name = name
+        self.symbol = symbol
+        self.number = number
 
-hydragon = Element(el_dict)
-print(hydragon.number)
+    def dump(self):
+        import pprint
+        pprint.pprint(vars(self))
+
+hydragon = Element('Hydragen','H',1)
+hydragon.dump()
