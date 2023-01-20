@@ -1,4 +1,4 @@
-#prob 10.6
+#prob 10.7
 
 class Element():
     def __init__(self, name, symbol, number):
@@ -7,8 +7,21 @@ class Element():
         self.number = number
 
     def dump(self):
-        import pprint
-        pprint.pprint(vars(self))
+        print(vars(self))
 
-hydragon = Element('Hydragen','H',1)
-hydragon.dump()
+hydrogen = Element('Hydrogen','H',1)
+hydrogen.dump()
+
+class Element():
+    def __init__(self, name, symbol, number):
+        self.name = name
+        self.symbol = symbol
+        self.number = number
+
+    def __str__(self):
+        return f'{vars(self)}'
+
+hydrogen = Element('Hydrogen','H',1)
+
+print(hydrogen)
+print(dir(Element))
