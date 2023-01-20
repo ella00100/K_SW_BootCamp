@@ -1,8 +1,8 @@
-# prob 10.2
+# prob 10.3
 
-class Thing2():
-    pass
+class Thing3():
+    def __init__(self,letters):
+        self.letters = letters
 
-ex = Thing2()
-ex.letters = 'abc'
-print(ex.letters)
+example = Thing3('xyz')
+print(example.letters)
