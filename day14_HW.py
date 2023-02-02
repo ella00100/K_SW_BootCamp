@@ -1,8 +1,10 @@
-# prob 10.3
+#prob 10.4
 
-class Thing3():
-    def __init__(self,letters):
-        self.letters = letters
+class Element():
+    def __init__(self, name, symbol, number):
+        self.name = name
+        self.symbol = symbol
+        self.number = number
 
-example = Thing3('xyz')
-print(example.letters)
+ex = Element('Hydrogen', 'H', 1)
+print(ex.name, ex.symbol, ex.number)
