@@ -17,13 +17,15 @@ class Pokemon:
         for i in range(len(self.skills)):
             print(f'{i+1} : {self.skills[i]}')
 
+    owner = property(get_owner,set_owner)
+
     def attack(self, idx):
         print(f'{self.skills[idx]} 공격 개시!')
 
 # 상속
 class Pikachu(Pokemon):
-    def __init__(self, get_owner, skills):
-        super().__init__(get_owner, skills)  # 부모 클래스 호출 "포켓몬 생성 : "출력
+    def __init__(self, owner, skills):
+        super().__init__(owner, skills)  # 부모 클래스 호출 "포켓몬 생성 : "출력
         self.name = "피카츄"
         print(f'{self.name}')
 
@@ -31,8 +33,8 @@ class Pikachu(Pokemon):
         print(f'나와라 {self.name}! {self.skills[idx]} 공격 개시!')
 
 class Ggoboogi(Pokemon):
-    def __init__(self, get_owner, skills):
-        super().__init__(get_owner, skills)
+    def __init__(self,owner, skills):
+        super().__init__(owner, skills)
         self.name = "꼬부기"
         print(f'{self.name}')
 
@@ -44,8 +46,8 @@ class Ggoboogi(Pokemon):
 
 
 class Pairi(Pokemon):
-    def __init__(self, get_owner, skills):
-        super().__init__(get_owner, skills)  # 부모 클래스 호출 "포켓몬 생성 : "출력
+    def __init__(self, owner, skills):
+        super().__init__(owner, skills)  # 부모 클래스 호출 "포켓몬 생성 : "출력
         self.name = "파이리"
         print(f'{self.name}')
 
