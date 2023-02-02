@@ -1,31 +1,83 @@
-class Shape:
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
+#pokemon vr.2
 
-    def get_area(self):
-        print('도형의 면적을 출력합니다.')
+class Pokemon:
+    def __init__(self, owner, skills):
+        self.hidden.owner = owner
+        self.skills = skills.split('/')
+        print(f'포켓몬 생성 :', end=' ')
 
-class Rectangle(Shape):
-    def __init__(self, x, y, width, length):
-        super().__init__(x, y)
-        self.width = width
-        self.length = length
+    def get_owner(self):
+        return self.hidden.owner
 
-    def get_area(self):
-        import math
-        return self.width * self.length
+    def set_owner(self, owner):
+        self.hidden.owner = owner
 
-    def __repr__(self):  #magic method
-        return f'사각형의 좌표는 x: {self.x}, y: {self.y}이고 넓이는 {self.get_area()}입니다.'
+    def info(self):
+        print(f'{self.get_owner()}의 포켓몬이 사용 가능한 스킬')
+        for i in range(len(self.skills)):
+            print(f'{i+1} : {self.skills[i]}')
 
-    def __add__(self, other):
-        # 넓이의 단순 합
-        # return self.get_area() + other.get_area()
-        # 각각의 사각형의 밑변과 높이를 더해 만든 사각형의 넓이
-        return Rectangle(0, 0, self.width + other.width, self.length+other.length)
-r1 = Rectangle(100,50, 5,2)
-print(r1)
+    def attack(self, idx):
+        print(f'{self.skills[idx]} 공격 개시!')
 
-r2 = Rectangle(100,100,10,5)
-print(r2)
+# 상속
+class Pikachu(Pokemon):
+    def __init__(self, get_owner, skills):
+        super().__init__(get_owner, skills)  # 부모 클래스 호출 "포켓몬 생성 : "출력
+        self.name = "피카츄"
+        print(f'{self.name}')
+
+    def attack(self, idx):  # 부모의 매서드 attck 오버 라이트  => 자식 Pikachu만 가짐
+        print(f'나와라 {self.name}! {self.skills[idx]} 공격 개시!')
+
+class Ggoboogi(Pokemon):
+    def __init__(self, get_owner, skills):
+        super().__init__(get_owner, skills)
+        self.name = "꼬부기"
+        print(f'{self.name}')
+
+    def attack(self, idx):
+        print(f'나와라 {self.name}! {self.skills[idx]} 공격 개시!')
+
+    def swim(self):  # 꼬부기만 가지는 매서드
+        print("음↓ 파↑ 음↓ 파↑")
+
+
+class Pairi(Pokemon):
+    def __init__(self, get_owner, skills):
+        super().__init__(get_owner, skills)  # 부모 클래스 호출 "포켓몬 생성 : "출력
+        self.name = "파이리"
+        print(f'{self.name}')
+
+    def attack(self, idx):  # 부모의 매서드 attck 오버 라이트  => 자식 Pikachu만 가짐
+        print(f'나와라 {self.name}! {self.skills[idx]} 공격 개시!')
+
+
+while True:
+    menu = input('1) 포켓몬 생성 2) 프로그램 종료 : ')
+    if menu == '2':
+        print('프로그램을 종료합니다')
+        break
+    elif menu == '1':
+        pokemon = input('1) 피카츄 2) 꼬부기 3) 파이리 : ')
+        if pokemon == '1':
+            name = input('플레이어 이름 입력 : ')
+            skill = input('사용 가능한 기술 입력 (/로 구분) : ')
+            p = Pikachu(name, skill)
+        elif pokemon == '2':
+            name = input('플레이어 이름 입력 : ')
+            skill = input('사용 가능한 기술 입력 (/로 구분) : ')
+            p = Ggoboogi(name, skill)
+        elif pokemon == '3':
+            name = input('플레이어 이름 입력 : ')
+            skill = input('사용 가능한 기술 입력 (/로 구분) : ')
+            p = Pairi(name, skill)
+        else:
+            print('주어진 선택지에서 골라주세요')
+
+        p.info()
+        attack_menu = input('공격 번호 선택 : ')
+        p.attack(int(attack_menu)-1)
+
+    else:
+        print('주어진 선택지에서 골라주세요')
