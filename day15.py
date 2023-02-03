@@ -1,61 +1,35 @@
+def find_and_insert_data(friend, k_count):
+    findPos = -1
+    for i in range(len(katok)):
+        pair = katok[i]
+        if k_count >= pair[1]:
+            findPos = i
+            break
+    if findPos == -1:
+        findPos = len(katok)
+    insert_data(findPos, (friend, k_count))
 
-def print_poly(tx,px):
-    '''
-    다항식을 format에 맞게 출력하는 함수
-    :param tx : 항 차수를 원소로 가지고 있는 리스트
-    :param px: 계수를 원소로 가지고 있는 리스트
-    :return: 다항식
-    '''
-    poly_str = "P(x) = "
+def insert_data(position, friend):
+    if position < 0 or position > len(katok):
+        print("데이터를 삽입할 범위를 넘어갔습니다")
+        return
+    katok.append(None)
+    kLen = len(katok)
 
-    for i in range(len(px)):
-        term = tx[i]   #항 차수
-        coef = px[i]  # 계수
+    for i in range(kLen-1, position, -1):
+        katok[i] = katok[i-1]
+        katok[i-1] = None
+    katok[position] = friend
 
-        if i> 0 and coef > 0:
-            poly_str = poly_str + "+"
-        elif coef == 0:
-            continue
+katok = [('서영',200),('예지',150),('예은',90),('서인',30),('성현', 15)]
 
-        if term == 0:
-            poly_str = poly_str + f'{coef}'
-        else:
-            poly_str = poly_str + f'{coef}x^{term} '
-
-
-    return poly_str
-
-
-def calc_poly(xVal, tx, px):
-    '''
-    다항식의 산술연산을 하는 함수
-    :param xVal: int x
-    :param tx : 항 차수를 원소로 가지고 있는 리스트
-    :param px: 계수를 원소로 가지고 있는 리스트
-    :return: 다항식 계산 값
-    '''
-    return_value = 0
-
-    for i in range(len(px)):
-        term = tx[i]
-        coef = px[i]  # 계수
-        return_value += coef * x_value ** term
-
-    return return_value
-
-
-## 전역 변수 선언 부분 ##
-tx = [300,20,0]
-px = [7, -4, 5]  # = 7x^3 -4x^2 +0x^1 +5x^0
-
-## 메인 코드 부분 ##
 if __name__ == "__main__":
-    pStr = print_poly(tx,px)
-    print(pStr)
+    while True:
+        data = input("추가할 친구--> ")
+        count = int(input("카톡 횟수--> "))
+        find_and_insert_data(data,count)
+        print(katok)
 
-    x_value = int(input("X값 입력 : "))
 
-    px_value = calc_poly(x_value, tx,px)
-    print(px_value)
 
 
