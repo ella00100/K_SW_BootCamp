@@ -1,4 +1,20 @@
+def add_data(pokemon):
+    '''
+    선형 리스트에 원소 추가
+    :param pokemon: int
+    :return: void
+    '''
+    pokemons.append(None)
+    pokemons[-1] = pokemon
+
+
 def insert_data(idx, pokemon):
+    '''
+    선형 리스트의 idx위치에 원소 삽입
+    :param idx: int
+    :param pokemon: str
+    :return: void
+    '''
     if idx < 0 or idx > len(pokemons):
         print("Out of range!")
         return
@@ -13,6 +29,11 @@ def insert_data(idx, pokemon):
 
 
 def delete_data(idx):
+    '''
+    선형 리스트의 idx위치 원소 삭제
+    :param idx: int
+    :return: void
+    '''
     if idx < 0 or idx > len(pokemons):
         print("Out of range!")
         return
@@ -27,6 +48,11 @@ def delete_data(idx):
     del (pokemons[len_pokemons - 1])
 
 def delete_alldata(idx):
+    '''
+    지정위치 이후 모든 데이터 삭제
+    :param idx: int
+    :return : void
+    '''
     if idx < 0 or idx > len(pokemons):
         print("Out of range!")
         return
@@ -40,14 +66,32 @@ def delete_alldata(idx):
     for i in range(idx, len_pokemons):
         pokemons.pop()
 
+pokemons = []
+select = -1
+
 if __name__ == "__main__":
-    pokemons = ["피카츄", "라이츄", "꼬부기", "파이리", "이상해"]
-    print(pokemons)
-    #insert_data(3, '라도란')
-    delete_data(1)     #라이츄 삭제
-    print(pokemons)
-    #insert_data(6, '버터풀')
-    delete_data(3)     #이상해 삭제
-    print(pokemons)
-    delete_alldata(1)
-    print(pokemons)
+
+    while (select != 4):
+
+        select = int(input("선택하세요(1: 추가, 2: 삽입, 3: 삭제, 4: 종료)--> "))
+
+        if (select == 1):
+            data = input("추가할 데이터--> ")
+            add_data(data)
+            print(pokemons)
+        elif (select == 2):
+            idx = int(input("삽입할 위치--> "))
+            data = input("추가할 데이터--> ")
+            insert_data(idx, data)
+            print(pokemons)
+        elif (select == 3):
+            idx = int(input("삭제할 위치--> "))
+            delete_data(idx)
+            print(pokemons)
+        elif (select == 4):
+            print(pokemons)
+            exit
+        else:
+            print("1~4 중 하나를 입력하세요.")
+            continue
+
