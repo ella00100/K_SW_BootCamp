@@ -26,6 +26,19 @@ def delete_data(idx):
 
     del (pokemons[len_pokemons - 1])
 
+def delete_alldata(idx):
+    if idx < 0 or idx > len(pokemons):
+        print("Out of range!")
+        return
+
+    len_pokemons = len(pokemons)
+    pokemons[idx] = None
+
+    for i in range(idx + 1, len_pokemons):
+        pokemons[i] = None
+
+    for i in range(idx, len_pokemons):
+        pokemons.pop()
 
 if __name__ == "__main__":
     pokemons = ["피카츄", "라이츄", "꼬부기", "파이리", "이상해"]
@@ -35,4 +48,6 @@ if __name__ == "__main__":
     print(pokemons)
     #insert_data(6, '버터풀')
     delete_data(3)     #이상해 삭제
+    print(pokemons)
+    delete_alldata(1)
     print(pokemons)
