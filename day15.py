@@ -1,97 +1,58 @@
-def add_data(pokemon):
+
+def print_poly(px):
     '''
-    선형 리스트에 원소 추가
-    :param pokemon: int
-    :return: void
+    다항식을 format에 맞게 출력하는 함수
+    :param px: 계수를 원소로 가지고 있는 리스트
+    :return: 다항식
     '''
-    pokemons.append(None)
-    pokemons[-1] = pokemon
+    term = len(px) - 1  # 최고차항 숫자 = 배열길이-1
+    poly_str = "P(x) = "
 
-
-def insert_data(idx, pokemon):
-    '''
-    선형 리스트의 idx위치에 원소 삽입
-    :param idx: int
-    :param pokemon: str
-    :return: void
-    '''
-    if idx < 0 or idx > len(pokemons):
-        print("Out of range!")
-        return
-
-    pokemons.append(None)
-
-    for i in range(len(pokemons) - 1, idx, -1):
-        pokemons[i] = pokemons[i - 1]
-        pokemons[i - 1] = None
-
-    pokemons[idx] = pokemon
-
-
-def delete_data(idx):
-    '''
-    선형 리스트의 idx위치 원소 삭제
-    :param idx: int
-    :return: void
-    '''
-    if idx < 0 or idx > len(pokemons):
-        print("Out of range!")
-        return
-
-    len_pokemons = len(pokemons)
-    pokemons[idx] = None
-
-    for i in range(idx + 1, len_pokemons):
-        pokemons[i - 1] = pokemons[i]
-        pokemons[i] = None
-
-    del (pokemons[len_pokemons - 1])
-
-def delete_alldata(idx):
-    '''
-    지정위치 이후 모든 데이터 삭제
-    :param idx: int
-    :return : void
-    '''
-    if idx < 0 or idx > len(pokemons):
-        print("Out of range!")
-        return
-
-    len_pokemons = len(pokemons)
-    pokemons[idx] = None
-
-    for i in range(idx + 1, len_pokemons):
-        pokemons[i] = None
-
-    for i in range(idx, len_pokemons):
-        pokemons.pop()
-
-pokemons = []
-select = -1
-
-if __name__ == "__main__":
-
-    while (select != 4):
-
-        select = int(input("선택하세요(1: 추가, 2: 삽입, 3: 삭제, 4: 종료)--> "))
-
-        if (select == 1):
-            data = input("추가할 데이터--> ")
-            add_data(data)
-            print(pokemons)
-        elif (select == 2):
-            idx = int(input("삽입할 위치--> "))
-            data = input("추가할 데이터--> ")
-            insert_data(idx, data)
-            print(pokemons)
-        elif (select == 3):
-            idx = int(input("삭제할 위치--> "))
-            delete_data(idx)
-            print(pokemons)
-        elif (select == 4):
-            print(pokemons)
-            exit
-        else:
-            print("1~4 중 하나를 입력하세요.")
+    for i in range(len(px)):
+        coef = px[i]  # 계수
+        if i> 0 and coef > 0:
+            poly_str = poly_str + "+"
+        elif coef == 0:
+            term = term-1
             continue
+        if term == 0:
+            poly_str = poly_str + f'{coef}'
+        else:
+            poly_str = poly_str + f'{coef}x^{term} '
+        term = term - 1
+
+    return poly_str
+
+
+def calc_poly(xVal, px):
+    '''
+    다항식의 산술연산을 하는 함수
+    :param xVal: int x
+    :param px: 계수를 원소로 가지고 있는 리스트
+    :return: 다항식 계산 값
+    '''
+    return_value = 0
+    term = len(px) - 1  # 최고차항 숫자 = 배열길이-1
+
+    for i in range(len(px)):
+        coef = px[i]  # 계수
+        return_value += coef * x_value ** term
+        term = term - 1
+
+    return return_value
+
+
+## 전역 변수 선언 부분 ##
+px = [7, -4, 0, 5]  # = 7x^3 -4x^2 +0x^1 +5x^0
+
+## 메인 코드 부분 ##
+if __name__ == "__main__":
+    pStr = print_poly(px)
+    print(pStr)
+
+    x_value = int(input("X값 입력 : "))
+
+    px_value = calc_poly(x_value, px)
+    print(px_value)
+
 
