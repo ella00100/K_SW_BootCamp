@@ -11,11 +11,11 @@ def print_node(start) :
     :return: void
     '''
     current = start         #current는 현재 처리 중인 node
-    if current.link == None :
+    if current.link == start : #다음 노드가 시작 위치라면 void 반환
         return
     print(current.data, end = ' ')
-    while current.link != start:   # 다음 링크가 start가 아닐때 까지
-        current = current.link    #다음 링크로 이동
+    while current.link != start:   # 다음 링크가 start가 아닐 때 까지
+        current = current.link    #다음 링크로 이동하면서
         print(current.data, end = ' ')  #data 출력
     print()
 
@@ -28,15 +28,15 @@ def insert_node(find_data, insert_data) :
     '''
     global memory, head, current, pre   #head는 첫번째 node, pre는 이전 노드
 
-    if head.data == find_data :      # 만약 find_data가 첫 노드라면
+    if head.data == find_data :      # 만약 find_data가 첫번째 노드 라면
         node = Node()                # 새로운 node 생성 , head 자리에 삽입
         node.data = insert_data
         node.link = head
         #circle 추가 부분
         last = head
-        while last.link != head:
-            last = last.link
-        last.link = node
+        while last.link != head:     # last가 마지막 노드가 될 때까지
+            last = last.link         # last노드 이동
+        last.link = node             # last 노드의 링크에 새로운 node 지정
 
         head = node
         return
@@ -70,11 +70,15 @@ def delet_node(delet_data) :
         print("첫번째 노드 삭제 완료")
         current = head
         head = head.link             # head를 한 칸 미룸
+        last = head
+        while last.link != head:     # 마지막 노드 찾아서 head와 링크 해주기
+            last = last.link
+        last.link = head
         del(current)                 # 현재 위치 노드 삭제
         return
 
     current = head                          # 첫 번째  외 노드 삭제
-    while current.link != None :            # 탐색
+    while current.link != head :            # 탐색
         pre = current
         current = current.link
         if current.data == delet_data :     #delet_data의 위치를 찾으면
@@ -86,19 +90,42 @@ def delet_node(delet_data) :
     print("삭제할 노드를 찾지 못함")
 
 def find_node(find_data):
+    '''
+    연결 리스트 안에서 원소의 존재 하면 해당 원소를 반환 하는 함수
+    :param find_data: str 찾고자 하는 원소
+    :return: str 해당 원소 / None
+    '''
     global head, current, pre
 
     current = head
     if current.data == find_data:
         return current
 
-    while current.link != None:
+    while current.link != head:
         current = current.link
         if current.data == find_data:
             return current
 
-    return Node(None)
+    return Node()
 
+def is_find(find_data):
+    '''
+    연결 리스트 안에서 원소의 존재 여부를 판단 하는 함수
+    :param find_data: str 찾고자 하는 원소
+    :return: 존재 하면 True/ 아니면 False
+    '''
+    global head, current, pre
+
+    current = head
+    if current.data == find_data:
+        return print(True)
+
+    while current.link != head:
+        current = current.link
+        if current.data == find_data:
+            return current
+
+    return print(False)
 
 ## 전역 변수 선언 부분 ##
 memory = []
@@ -141,5 +168,6 @@ if __name__ == "__main__" :
 
     print(find_node("피카츄").data)
     print(find_node("둥이").data)
-
+    is_find("피카츄")
+    is_find("둥이")
 
