@@ -1,82 +1,25 @@
-import random
+stack = [None for _ in range (5)]  #빈 공간 5자리 생성
+top = -1 #초기 상태
 
-class Node() :
-    def __init__ (self) :
-        self.data = None
-        self.link = None
+top += 1            #top을 증가시켜 준 뒤
+stack[top] = "커피"  # 그 자리에 데이터 삽입
+top += 1
+stack[top] = "녹차"
+top += 1
+stack[top] = "꿀물"
+top += 1
+stack[top] = "카푸치노"
+top += 1
+stack[top] = "바닐라 라떼"
 
-def print_node(start) :
-    '''
-    시작 위치를 인수로 받아 데이터를 출력하는 함수
-    :param start: 출력을 시작할 위치
-    :return: void
-    '''
-    current = start         #current는 현재 처리 중인 node
-    if current.link == start : #다음 노드가 시작 위치라면 void 반환
-        return
-    print(current.data, end = ' ')
-    while current.link != start:   # 다음 링크가 start가 아닐 때 까지
-        current = current.link    #다음 링크로 이동하면서
-        print(current.data, end = ' ')  #data 출력
-    print()
+print("_______스택 데이터 생성________")
+for i in range(len(stack)-1,-1,-1):
+    print(stack[i])
 
-def count_plus_minus():
-    global head, current
+data = stack[top]
+stack[top] = None
+top -= 1
 
-    plus, minus, zero = 0, 0, 0
-
-    current = head
-    while True:
-        if current.data > 0:
-            plus = plus + 1
-        elif current.data < 0:
-            minus = minus + 1
-        else:
-            zero = zero + 1
-        if current.link == head:
-            break
-        current = current.link
-
-    return plus, minus, zero
-
-
-def makeSignToggle():
-    current = head
-    while True:
-        current.data = current.data * -1
-        if current.link == head:
-            break
-        current = current.link
-
-
-memory = []
-head, current, pre = None, None, None
-
-
-if __name__ == "__main__" :
-
-    dataArray = []
-    for _ in range(7) :
-        dataArray.append(random.randint(-100, 100))
-
-    node = Node()
-    node.data = dataArray[0]
-    head = node
-    node.link = head
-    memory.append(node)
-
-    for data in dataArray[1:] :
-        pre = node
-        node = Node()
-        node.data = data
-        pre.link = node
-        node.link = head
-        memory.append(node)
-
-    print_node(head)
-
-    plus_minus_zero = count_plus_minus()
-    print(f'양수 : {plus_minus_zero[0]}개, 음수 : {plus_minus_zero[1]}개, zero : {plus_minus_zero[2]}개')
-
-    makeSignToggle()
-    print_node(head)
+print("_______스택 데이터 추출 pop________")
+for i in range(len(stack)-1,-1,-1):
+    print(stack[i])
