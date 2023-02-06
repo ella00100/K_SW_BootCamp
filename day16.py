@@ -20,43 +20,32 @@ def print_node(start) :
         print(current.data, end = ' ')  #data 출력
     print()
 
-def  count_odd_even() :
-    '''
-    짝수와 홀수 개수를 세는 함수
-    :return: int odd개수, even개수
-    '''
-    global memory, head, current, pre
+def count_plus_minus():
+    global head, current
 
-    odd, even = 0, 0
+    plus, minus, zero = 0, 0, 0
 
     current = head
     while True:
-        if current.data % 2 == 0:
-            even += 1
-        else :
-            odd += 1
-        if current.link == head :
+        if current.data > 0:
+            plus = plus + 1
+        elif current.data < 0:
+            minus = minus + 1
+        else:
+            zero = zero + 1
+        if current.link == head:
             break
         current = current.link
 
-    return odd, even
+    return plus, minus, zero
 
-def make_minus_number(odd, even):
-    '''
-    홀수와 짝수 중 많은 쪽을 음수로 만드는 함수
-    :param odd: int 홀수의 개수
-    :param even: int 짝수의 개수
-    :return: void
-    '''
-    if odd > even :
-        reminder = 1
-    else :
-        reminder = 0
 
+def makeSignToggle():
     current = head
-    while current.link != head:
-        if current.data % 2 == reminder:
-            current.data *= -1
+    while True:
+        current.data = current.data * -1
+        if current.link == head:
+            break
         current = current.link
 
 
@@ -68,7 +57,7 @@ if __name__ == "__main__" :
 
     dataArray = []
     for _ in range(7) :
-        dataArray.append(random.randint(1, 100))
+        dataArray.append(random.randint(-100, 100))
 
     node = Node()
     node.data = dataArray[0]
@@ -86,9 +75,8 @@ if __name__ == "__main__" :
 
     print_node(head)
 
-    odd_even = count_odd_even()
-    print(f'홀수 : {odd_even[0]}개 \t 짝수 : {odd_even[1]}개')
+    plus_minus_zero = count_plus_minus()
+    print(f'양수 : {plus_minus_zero[0]}개, 음수 : {plus_minus_zero[1]}개, zero : {plus_minus_zero[2]}개')
 
-    make_minus_number(odd_even[0],odd_even[1])
+    makeSignToggle()
     print_node(head)
-
