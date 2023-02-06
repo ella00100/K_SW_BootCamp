@@ -22,29 +22,48 @@ def push(data):
 def pop():
     global size, stack, top
     if is_stack_empty():
-        print("Stack is EMPTY!")
         return
     temp = stack[top]
     stack[top]=None
     top = top-1
     return temp
 
-size = 6
-stack = [None for _ in range(6)]
+def peek():
+    global size, stack, top
+    if is_stack_empty():
+        print("Stack is EMPTY!")
+        return None
+    return stack[top]
+
+size = 4
+stack = [None for _ in range(size)]
 top = -1
 
 if __name__ == "__main__" :
-    stone_array = ["주황", "초록", "파랑", "보라","빨강","노랑"]
+    with open("진달래꽃.txt",'r',encoding='UTF8') as file:
+        line_array = file.readlines()
 
-    print("과자집에 가는길", end = ' ')
-    for stone in stone_array:
-        push(stone)
-        print(f'{stone} --> ', end = ' ')
-    print("과자집")
+        print("-----원본-----")
+        for line in line_array:
+            push(line)
+            print(line, end = '')
 
-    print("우리집에 가는길", end = ' ')
-    while top != -1:
-        data = pop()
-        print(f'{data} --> ', end = ' ')
-    print("우리집")
+        print("\n-----거꾸로 처리된 결과-----")
+        while True:
+            line = pop()
+            if line == None:
+                break
+            small_stack = [None for _ in range(len(line))]
+            small_top = -1
+
+            for ch in line:
+                small_top += 1
+                small_stack[small_top] = ch
+
+            while True:
+                if small_top == -1:
+                    break
+                ch = small_stack[small_top]
+                small_top -= 1
+                print(ch, end = '')
 
