@@ -11,10 +11,10 @@ def print_node(start) :
     :return: void
     '''
     current = start         #current는 현재 처리 중인 node
-    if current == None :
+    if current.link == None :
         return
     print(current.data, end = ' ')
-    while current.link != None:   #비워 있지 않을 때 까지 (마지막 위치 까지) 반복
+    while current.link != start:   # 다음 링크가 start가 아닐때 까지
         current = current.link    #다음 링크로 이동
         print(current.data, end = ' ')  #data 출력
     print()
@@ -32,11 +32,17 @@ def insert_node(find_data, insert_data) :
         node = Node()                # 새로운 node 생성 , head 자리에 삽입
         node.data = insert_data
         node.link = head
+        #circle 추가 부분
+        last = head
+        while last.link != head:
+            last = last.link
+        last.link = node
+
         head = node
         return
 
     current = head
-    while current.link != None :    # 중간에 위치한 노드라면
+    while current.link != head :    # 중간에 위치한 노드라면
         pre = current               # 탐색
         current = current.link
         if current.data == find_data : #find_data의 위치를 찾으면
@@ -49,6 +55,7 @@ def insert_node(find_data, insert_data) :
     node = Node()                   # 마지막 노드 삽입
     node.data = insert_data
     current.link = node
+    node.link = head
 
 
 def delet_node(delet_data) :
@@ -86,7 +93,7 @@ def find_node(find_data):
         return current
 
     while current.link != None:
-        crrent = current.link
+        current = current.link
         if current.data == find_data:
             return current
 
@@ -104,6 +111,8 @@ if __name__ == "__main__" :
     node = Node()			# 첫 번째 노드
     node.data = dataArray[0]
     head = node
+    node.link = head
+
     memory.append(node)
 
     for data in dataArray[1:] :		# 두 번째 노드 부터 마지막 까지
@@ -111,6 +120,7 @@ if __name__ == "__main__" :
         node = Node()
         node.data = data
         pre.link = node
+        node.link = head
         memory.append(node)
 
     print_node(head)
@@ -118,6 +128,8 @@ if __name__ == "__main__" :
     insert_node("피카츄", "잠만보")
     print_node(head)
     insert_node("버터풀", "라도란")
+    print_node(head)
+    insert_node("없는 데이터", "어니부기")
     print_node(head)
 
     delet_node("잠만보")
