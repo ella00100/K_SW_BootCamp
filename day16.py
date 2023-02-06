@@ -1,25 +1,64 @@
-stack = [None for _ in range (5)]  #빈 공간 5자리 생성
-top = -1 #초기 상태
+def is_stack_full():
+    global size, stack, top
+    if top >= size-1:
+        return True
+    return False
 
-top += 1            #top을 증가시켜 준 뒤
-stack[top] = "커피"  # 그 자리에 데이터 삽입
-top += 1
-stack[top] = "녹차"
-top += 1
-stack[top] = "꿀물"
-top += 1
-stack[top] = "카푸치노"
-top += 1
-stack[top] = "바닐라 라떼"
+def is_stack_empty():
+    global size, stack, top
+    if top == -1:
+        return True
+    else:
+        return False
 
-print("_______스택 데이터 생성________")
-for i in range(len(stack)-1,-1,-1):
-    print(stack[i])
+def push(data):
+    global size, stack, top
+    if is_stack_full():
+        print("Stack is FULL!")
+        return
+    top = top + 1
+    stack[top] = data
 
-data = stack[top]
-stack[top] = None
-top -= 1
+def pop():
+    global size, stack, top
+    if is_stack_empty():
+        print("Stack is EMPTY!")
+        return
+    temp = stack[top]
+    stack[top]=None
+    top = top-1
+    return temp
 
-print("_______스택 데이터 추출 pop________")
-for i in range(len(stack)-1,-1,-1):
-    print(stack[i])
+def peek():
+    global size, stack, top
+    if is_stack_empty():
+        print("Stack is EMPTY!")
+        return None
+    return stack[top]
+
+size = 5
+stack = [None for _ in range(5)]
+top = -1
+
+if __name__ == "__main__" :
+    menu = int(input("1)삽입 2)추출 3)확인 4)종료 :  "))
+
+    while menu != 4 :
+        if menu== 1 :
+            data = input("입력할 데이터 ==> ")
+            push(data)
+            print("스택 상태 : ", stack)
+        elif menu== 2 :
+            data = pop()
+            print("추출된 데이터 ==> ", data)
+            print("스택 상태 : ", stack)
+        elif menu== 3 :
+            data = peek()
+            print("확인된 데이터 ==> ", data)
+            print("스택 상태 : ", stack)
+        else :
+            print("입력이 잘못됨")
+
+        menu = int(input("1)삽입 2)추출 3)확인 4)종료 :  "))
+
+    print("프로그램 종료!")
