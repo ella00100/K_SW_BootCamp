@@ -1,47 +1,50 @@
-class double_linked_Node():
-    def __init__(self):
-        self.pre_link = None
-        self.data = None
-        self.link = None
+def is_stack_full():
+    global size, stack, top
+    if top >= size-1:
+        return True
+    return False
 
-def print_nodes(start):
-    current = start
-    while current.link != None:
-        current = current.link
-        print(current.data, end=' ')
-    print()
+def is_stack_empty():
+    global size, stack, top
+    if top == -1:
+        return True
+    else:
+        return False
 
-def reverse_print_nodes(head):
-    last = head
-    while last.link != None:
-        last = last.link
-    # last : 진짜 last
-    current = last
+def push(data):
+    global size, stack, top
+    if is_stack_full():
+        print("Stack is FULL!")
+        return
+    top = top + 1
+    stack[top] = data
 
-    while current.pre_link != None:
-        print(current.data, end = ' ')
-        current = current.pre_link
-    return
+def pop():
+    global size, stack, top
+    if is_stack_empty():
+        print("Stack is EMPTY!")
+        return
+    temp = stack[top]
+    stack[top]=None
+    top = top-1
+    return temp
 
+size = 6
+stack = [None for _ in range(6)]
+top = -1
 
-memory = []
-head, current, pre, last = [None for _ in range(4)]
-data_array = ["피카츄", "파이리", "라이츄", "꼬부기", "버터풀"]
+if __name__ == "__main__" :
+    stone_array = ["주황", "초록", "파랑", "보라","빨강","노랑"]
 
-if __name__ == "__main__":
-    node = double_linked_Node()
-    node.data = data_array[0]
-    head = node
-    memory.append(node)
+    print("과자집에 가는길", end = ' ')
+    for stone in stone_array:
+        push(stone)
+        print(f'{stone} --> ', end = ' ')
+    print("과자집")
 
-    for data in data_array:
-        pre = node
-        node = double_linked_Node()
-        node.data = data
-        pre.link = node
-        node.pre_link = pre
-        memory.append(node)
-
-    print_nodes(head)
-    reverse_print_nodes(head)
+    print("우리집에 가는길", end = ' ')
+    while top != -1:
+        data = pop()
+        print(f'{data} --> ', end = ' ')
+    print("우리집")
 
