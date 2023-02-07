@@ -14,7 +14,7 @@ def is_queue_empty():
 
 def enQueue(data):
     global SIZE, queue, front, rear
-    if (is_queue_empty()):
+    if (is_queue_full()):
         print("Queue is FULL")
         return
     rear += 1
