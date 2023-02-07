@@ -1,62 +1,57 @@
-class TreeNode() :
-	def __init__ (self) :
-		self.left = None
-		self.data = None
-		self.right = None
+class TreeNode:
+    def __init__ (self) :
+        self.left = None
+        self.data = None
+        self.right = None
 
-node1 = TreeNode()
-node1.data = '대표'
 
-node2 = TreeNode()
-node2.data = '관리이사'
-node1.left = node2
+memory = []
+root = None
+data_array = [1, 10, 4, 9, 28, 5, 17]
 
-node3 = TreeNode()
-node3.data = '기술이사'
-node1.right = node3
+# 첫 번째 노드 생성
+node = TreeNode()
+node.data = data_array[0]
+root = node
+memory.append(node)   # 생성한 노드 메모리에 저장
 
-node4 = TreeNode()
-node4.data = '인사부장'
-node2.left = node4
+# 노드 생성, 데이터 추가
+for data in data_array[1:] :
 
-node5 = TreeNode()
-node5.data = '회계부장'
-node2.right = node5
+	node = TreeNode()
+	node.data = data
 
-node6 = TreeNode()
-node6.data = '연구부장'
-node3.left = node6
+	current = root 		# 현재 노드를 root로 지정
+	while True :
+		if data < current.data : 		# 삽입 할 데이터가 현재 노드보다 작고
+			if current.left == None :	# 왼쪽 링크가 비었으면
+				current.left = node		# 새 노드를 왼쪽 링크로 연결
+				break
+			current = current.left		# 아니면 왼쪽 노드와 다시 비교
+		else :
+			if current.right == None :  # 삽입 할 데이터가 더 크면
+				current.right = node   	# 새 노드를 오른쪽 링크로 연결
+				break
+			current = current.right
 
-def preorder(node) :
-	if node == None:
-		return
-	print(node.data, end='->')
-	preorder(node.left)
-	preorder(node.right)
+	memory.append(node)
 
-def inorder(node):
-	if node == None :
-		return
-	inorder(node.left)
-	print(node.data, end='->')
-	inorder(node.right)
 
-def postorder(node):
-	if node == None :
-		return
-	postorder(node.left)
-	postorder(node.right)
-	print(node.data, end='->')
+find_num = 10
 
-print('전위 순회 : ', end = '')
-preorder(node1)
-print('끝')
-
-print('중위 순회 : ', end = '')
-inorder(node1)
-print('끝')
-
-print('후위 순회 : ', end = '')
-postorder(node1)
-print('끝')
+current = root
+while True :
+	if find_num == current.data:
+		print(find_num, '을(를) 찾음.')
+		break
+	elif find_num < current.data :
+		if current.left == None :
+			print(find_num, '이(가) 트리에 없음')
+			break
+		current = current.left
+	else :
+		if current.right == None :
+			print(find_num, '이(가) 트리에 없음')
+			break
+		current = current.right
 
