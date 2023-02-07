@@ -56,4 +56,5 @@ if __name__ == "__main__":
         print(f'대기 줄 상태 : {queue}')
         print(f'{deQueue2()}님 식당에 들어감')
         print(queue)
+        print("\n")
     print("식당 영업 종료!")
