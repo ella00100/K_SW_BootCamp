@@ -1,57 +1,81 @@
-class TreeNode:
-    def __init__ (self) :
-        self.left = None
-        self.data = None
-        self.right = None
+class TreeNode():
+	def __init__(self):
+		self.left = None
+		self.data = None
+		self.right = None
 
 
 memory = []
 root = None
-data_array = [1, 10, 4, 9, 28, 5, 17]
+nameAry = ['블랙핑크', '레드벨벳', '마마무', '에이핑크', '걸스데이', '트와이스']
 
-# 첫 번째 노드 생성
+#첫 노드 생성
 node = TreeNode()
-node.data = data_array[0]
+node.data = nameAry[0]
 root = node
-memory.append(node)   # 생성한 노드 메모리에 저장
+memory.append(node)
 
-# 노드 생성, 데이터 추가
-for data in data_array[1:] :
+# data_array 크기에 맞춰 이진 트리 생성
+for name in nameAry[1:]:
 
 	node = TreeNode()
-	node.data = data
+	node.data = name
 
-	current = root 		# 현재 노드를 root로 지정
-	while True :
-		if data < current.data : 		# 삽입 할 데이터가 현재 노드보다 작고
-			if current.left == None :	# 왼쪽 링크가 비었으면
-				current.left = node		# 새 노드를 왼쪽 링크로 연결
+	current = root
+	while True:
+		if name < current.data:
+			if current.left == None:
+				current.left = node
 				break
-			current = current.left		# 아니면 왼쪽 노드와 다시 비교
-		else :
-			if current.right == None :  # 삽입 할 데이터가 더 크면
-				current.right = node   	# 새 노드를 오른쪽 링크로 연결
+			current = current.left
+		else:
+			if current.right == None:
+				current.right = node
 				break
 			current = current.right
 
 	memory.append(node)
 
 
-find_num = 10
+deleteName = '마마무'
 
 current = root
-while True :
-	if find_num == current.data:
-		print(find_num, '을(를) 찾음.')
-		break
-	elif find_num < current.data :
-		if current.left == None :
-			print(find_num, '이(가) 트리에 없음')
-			break
-		current = current.left
-	else :
-		if current.right == None :
-			print(find_num, '이(가) 트리에 없음')
-			break
-		current = current.right
+parent = None
+while True:
+	if deleteName == current.data:
 
+		if current.left == None and current.right == None:
+			if parent.left == current:
+				parent.left = None
+			else:
+				parent.right = None
+			del (current)
+
+		elif current.left != None and current.right == None:
+			if parent.left == current:
+				parent.left = current.left
+			else:
+				parent.right = current.left
+			del (current)
+
+		elif current.left == None and current.right != None:
+			if parent.left == current:
+				parent.left = current.right
+			else:
+				parent.right = current.right
+			del (current)
+
+		print(deleteName, '이(가) 삭제됨.')
+		break
+	elif deleteName < current.data:
+		if current.left == None:
+			print(deleteName, '이(가) 트리에 없음')
+			break
+		parent = current
+		current = current.left
+	else:
+		if current.right == None:
+			print(deleteName, '이(가) 트리에 없음')
+			break
+		parent = current
+		current = current.right
