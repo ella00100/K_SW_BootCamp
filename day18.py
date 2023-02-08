@@ -4,8 +4,8 @@ class Graph() :
         self.graph = [[0 for _ in range(size)] for _ in range(size)]
 
 G1 = None
-stack = []
-visitedAry = []		# 방문한 정점
+queue = []
+visited_array = []		# 방문한 정점
 
 #정점생성
 G1 = Graph(9)
@@ -31,27 +31,27 @@ for row in range(9) :
 
 #깊이 우선 탐색
 current = 0		# 시작 정점 A
-stack.append(current)
-visitedAry.append(current)
+queue.append(current)
+visited_array.append(current)
 
-while (len(stack) != 0) :
+while (len(queue) != 0) :
     next = None
     for vertex in range(9) :                #한 행(정점)씩 돌면서
         if G1.graph[current][vertex] == 1 : #연결된 도착점 찾기
-            if vertex in visitedAry :  	   # 방문한 적이 있는 정점이면 탈락
+            if vertex in visited_array :  	   # 방문한 적이 있는 정점이면 탈락
                 pass
             else : 			   # 방문한 적이 없으면 다음 정점으로 지정
                 next = vertex
                 break
 
-    if next != None :			  	   # 다음에 방문할 정점이 있는 경우
+    if next is not None :			  	   # 다음에 방문할 정점이 있는 경우
         current = next                 # 다음으로 이동하여 방문내역 추가
-        stack.append(current)
-        visitedAry.append(current)
+        queue.append(current)
+        visited_array.append(current)
     else :            	  	  	  	  # 다음에 방문할 정점이 없는 경우
-        current = stack.pop()
+        current = queue.pop()
 
 
 print('방문 순서 --> ', end='')
-for i in visitedAry :
+for i in visited_array :
     print(chr(ord('A')+i), end='   ')
