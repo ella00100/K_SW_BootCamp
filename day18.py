@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 class Graph():
     def __init__(self,size):
         self.SIZE = size
@@ -6,45 +8,93 @@ class Graph():
 def print_graph(g):
     print('\t', end = ' ')
     for v in range(g.SIZE):
-        print('%8s' %vertex_array[v][0], end = ' ')
+        print('%-4s' %vertex_array[v], end = ' ')
     print()
     for row in range(g.SIZE):
-        print("%8s" %vertex_array[row][0], end = ' ')
+        print(vertex_array[row], end = ' ')
         for col in range(g.SIZE):
-            print("\t", g.graph[row][col], end ='\t')
+            print("%4d" %g.graph[row][col], end ='  ')
         print()
     print()
 
+def find_vertex(g, find_v):
+    stack = []
+    visited_array = []
 
-G = None
-stack = []
-visited_array = []
+    current = 0
+    stack.append(current)
+    visited_array.append(current)
 
-G = Graph(5)
-vertex_array = [["GS25",30], ["CU",60], ["Seven11",10], ["MiniStop",90], ["Emart24",40]]
-GS25, CU, Seven11, MiniStop, Emart24 = 0,1,2,3,4
+    while(len(stack) != 0):
+        next = None
+        for vertex in range(size):
+            if g.graph[current][vertex] != 0:
+                if vertex in visited_array:
+                    pass
+                else:
+                    next = vertex
+                    break
+        if next != None:
+            current = next
+            stack.append(current)
+            visited_array.append(current)
+        else:
+            current = stack.pop()
+    if find_v in visited_array:
+        return True
+    else:
+        return False
 
-G.graph[GS25][CU] =  1; G.graph[GS25][Seven11] = 1
-G.graph[CU][GS25] = 1; G.graph[CU][Seven11] = 1; G.graph[CU][MiniStop] = 1
-G.graph[Seven11][GS25] = 1; G.graph[Seven11][CU] = 1; G.graph[Seven11][MiniStop] = 1
-G.graph[MiniStop][CU] = 1; G.graph[MiniStop][Seven11] = 1; G.graph[MiniStop][Emart24] = 1
-G.graph[Emart24][MiniStop] = 1
 
+size = 6
+G = Graph(size)
+vertex_array = ["서울", "뉴욕", "런던", "북경", "방콕", "파리"]
+서울, 뉴욕, 런던, 북경, 방콕, 파리 = 0,1,2,3,4,5
+
+G.graph[서울][뉴욕] = 80; G.graph[서울][북경] = 10
+G.graph[뉴욕][서울] = 80; G.graph[뉴욕][북경] = 40; G.graph[뉴욕][방콕] = 70
+G.graph[런던][방콕] = 30; G.graph[런던][파리] = 60
+G.graph[북경][서울] = 10; G.graph[북경][뉴욕] = 40; G.graph[북경][방콕] = 50
+G.graph[방콕][뉴욕] = 70; G.graph[방콕][런던] = 30; G.graph[방콕][북경] = 50; G.graph[방콕][파리] = 20
+G.graph[파리][런던] = 60; G.graph[파리][방콕] = 20
+
+print('##   해저 케이블 연결을 위한 전체 연결도   ##')
 print_graph(G)
 
-current = 0
-stack.append(current)
-visited_array.append(current)
+edge_array = []
+for i in range(size):
+    for k in range(size):
+        if G.graph[i][k] != 0:
+            edge_array.append([G.graph[i][k],i,k])
+edge_array = sorted(edge_array, key = itemgetter(0), reverse=False)
+
+sorted_array = []
+for i in range(0, len(edge_array),2):
+    sorted_array.append(edge_array[i])
+
+index = 0
+while (len(sorted_array) > size-1):
+    start = sorted_array[index][1]
+    end = sorted_array[index][2]
+    save_velocity = sorted_array[index][0]
+
+    G.graph[start][end] = 0
+    G.graph[end][start] = 0
+
+    start_TF = find_vertex(G,start)
+    end_TF = find_vertex
+
+    if start_TF and end_TF:
+        del(sorted_array[index])
+    else:
+        G.graph[start][end] = save_velocity
+        G.graph[end][start] = save_velocity
+        index = index + 1
+
+print('##    가장 효율적인 해저 케이블 연결도    ##')
+print_graph(G)
 
 
-for i in range(len(vertex_array)-1):
-    maxcount = 0
-    maxstore = None
-    if vertex_array[i][1] >= vertex_array[i+1][1]:
-        maxcount = vertex_array[i][1]
-        maxstore = vertex_array[i][0]
-
-print(f'허니버터칩 최대 보유 편의점(개수) --> {maxstore} ( {maxcount} ) ')
 
 
 
