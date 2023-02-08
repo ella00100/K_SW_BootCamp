@@ -1,10 +1,13 @@
-sum_value = 0
-for n in range(10,0,-1):
-    sum_value += n
-print(sum_value)
+def count_down(n):
+    if n == 0:
+        print('발사!')
+    else:
+        print(n)
+        count_down(n-1)
+count_down(5)
 
-def Addnum(num):
-    if num <= 1:
-        return 1
-    return num + Addnum(num-1)
-print(Addnum(10))
+def print_star(n):
+    if n>0:
+        print_star(n-1)
+        print("★"*n)
+print_star(5)
