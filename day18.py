@@ -1,12 +1,10 @@
-def OpenBox():
-    global count
-    print("open box!")
-    count = count -1
-    if count == 0:
-        print("put on the ring, return")
-        return
-    OpenBox()
-    print("packing box")
+sum_value = 0
+for n in range(10,0,-1):
+    sum_value += n
+print(sum_value)
 
-count = 10
-OpenBox()
+def Addnum(num):
+    if num <= 1:
+        return 1
+    return num + Addnum(num-1)
+print(Addnum(10))
