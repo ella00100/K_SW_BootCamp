@@ -1,32 +1,57 @@
-class Graph:
-    def __init__(self,size):
-        self.SIZE = size #그래프 크기
-        #0으로 초기화된 이차원 배열
+class Graph() :
+    def __init__ (self, size) :
+        self.SIZE = size
         self.graph = [[0 for _ in range(size)] for _ in range(size)]
 
+G1 = None
+stack = []
+visitedAry = []		# 방문한 정점
 
-G1 = Graph(4)
+#정점생성
+G1 = Graph(9)
 
-#(A,B), (A,C), (A,D)
-G1.graph[0][1] = 1
-G1.graph[0][2] = 1
-G1.graph[0][3] = 1
+#엣지 생성, 연결
+G1.graph[0][1] = 1; G1.graph[0][2] = 1; G1.graph[0][4] = 1
+G1.graph[1][0] = 1; G1.graph[1][2] = 1; G1.graph[1][3] = 1
+G1.graph[2][0] = 1; G1.graph[2][1] = 1; G1.graph[2][3] = 1; G1.graph[2][4] = 1; G1.graph[2][5] = 1;
+G1.graph[3][1] = 1; G1.graph[3][2] = 1
+G1.graph[4][0] = 1; G1.graph[4][2] = 1; G1.graph[4][6] = 1; G1.graph[4][7] = 1
+G1.graph[5][2] = 1
+G1.graph[6][5] = 1; G1.graph[6][8] = 1
+G1.graph[7][4] = 1; G1.graph[7][8] = 1
+G1.graph[8][6] = 1; G1.graph[8][7] = 1
 
-#(B,A), (B,C)
-G1.graph[1][0] = 1
-G1.graph[1][2] = 1
 
-#(C,A), (C,B), (C,D)
-G1.graph[2][0] = 1
-G1.graph[2][1] = 1
-G1.graph[2][3] = 1
-
-#(D,A), (D,C)
-G1.graph[3][0] = 1
-G1.graph[3][2] = 1
-
-print("그래프")
-for row in range(4):
-    for col in range(4):
+#그래프 출력
+for row in range(9) :
+    for col in range(9) :
         print(G1.graph[row][col], end = ' ')
     print()
+
+
+#깊이 우선 탐색
+current = 0		# 시작 정점 A
+stack.append(current)
+visitedAry.append(current)
+
+while (len(stack) != 0) :
+    next = None
+    for vertex in range(9) :                #한 행(정점)씩 돌면서
+        if G1.graph[current][vertex] == 1 : #연결된 도착점 찾기
+            if vertex in visitedAry :  	   # 방문한 적이 있는 정점이면 탈락
+                pass
+            else : 			   # 방문한 적이 없으면 다음 정점으로 지정
+                next = vertex
+                break
+
+    if next != None :			  	   # 다음에 방문할 정점이 있는 경우
+        current = next                 # 다음으로 이동하여 방문내역 추가
+        stack.append(current)
+        visitedAry.append(current)
+    else :            	  	  	  	  # 다음에 방문할 정점이 없는 경우
+        current = stack.pop()
+
+
+print('방문 순서 --> ', end='')
+for i in visitedAry :
+    print(chr(ord('A')+i), end='   ')
