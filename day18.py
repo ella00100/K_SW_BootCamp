@@ -1,10 +1,12 @@
+from collections import deque
+
 class Graph() :
     def __init__ (self, size) :
         self.SIZE = size
         self.graph = [[0 for _ in range(size)] for _ in range(size)]
 
 G1 = None
-queue = []
+queue = deque([])
 visited_array = []		# 방문한 정점
 
 #정점생성
@@ -28,7 +30,6 @@ for row in range(9) :
         print(G1.graph[row][col], end = ' ')
     print()
 
-
 #깊이 우선 탐색
 current = 0		# 시작 정점 A
 queue.append(current)
@@ -46,11 +47,11 @@ while (len(queue) != 0) :
 
     if next is not None :			  	   # 다음에 방문할 정점이 있는 경우
         current = next                 # 다음으로 이동하여 방문내역 추가
-        queue.append(current)
+        queue.append(current)          # enQueue
         visited_array.append(current)
     else :            	  	  	  	  # 다음에 방문할 정점이 없는 경우
-        current = queue.pop()
-
+#        current = queue.pop() ## O(n)OVERHEAD (Queue 사용 시 문제점) ##
+         current = queue.popleft() #O(1) deQueue
 
 print('방문 순서 --> ', end='')
 for i in visited_array :
