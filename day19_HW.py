@@ -1,18 +1,20 @@
-def Decimical_to_what(base,num):
-    if num < base:                  # 숫자가 입력한 진수 보다 작으면
-        print(number_array[num], end = '')   # number_array의 해당 값 출력  (ex, 8진수, 3이면 3출력)
-    else:                           # 진수 보다 크다면
-        Decimical_to_what(base,num//base) # 입력된 숫자를 진수로 나눠 재귀함수 호출
-        print(number_array[num%base], end = '')              # 숫자를 진수로 나눈 나머지 출력
+import tkinter as tk
 
-number_array = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F']
+def Sierpinski(x,y,size):       #시작점의 위치와 한 변의 길이를 매개변수로 받아옴
+    if size >= 20:              # 한 변의 길이가 20보다 크다면
+        Sierpinski(x,y,size/2)  # 왼쪽 아래 작은 삼각형 재귀
+        Sierpinski(x+size/2,y,size/2) # 오른쪽 아래 작은 삼각형 재귀
+        Sierpinski(x+size/4, int(y-size*(3**0.5)/4), size/2) # 위쪽 작은 삼각형 재귀
+    else:                    #  다각형 그리기 => 세 꼭지점 지정,             채우기 색, 선 색 : 빨강"
+        canvas.create_polygon(x,y, x+size,y, x+size/2,y-size*(3**0.5)/2, fill='red', outline = 'red')
 
-inum = int(input('10진수 입력 ---> '))
-print('2진수 :', end = ' ')
-Decimical_to_what(2,inum)
-print('\n8진수 :', end = ' ')
-Decimical_to_what(8,inum)
-print('\n10진수 :', end = ' ')
-Decimical_to_what(10,inum)
-print('\n16진수 :', end = ' ')
-Decimical_to_what(16,inum)
+wsize = 500   #화면크기
+
+window = tk.Tk() #창 생성
+window.title("Sierpinski") # 창 제목 생성
+canvas = tk.Canvas(window, height= wsize, width= wsize, bg = 'white')
+
+Sierpinski(wsize/5, wsize/5*4, wsize*2/3)
+
+canvas.pack()
+window.mainloop()
