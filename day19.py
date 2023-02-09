@@ -1,58 +1,26 @@
-# BFS
-from collections import deque
+def fibo_recu(n) :
+    if n == 0 :
+        return 0
+    elif n == 1 :
+        return 1
+    else :
+        return fibo_recu(n - 1) + fibo_recu(n - 2)
 
+#속도 개선
+def fibo_iter(n):
+    r = list()
+    p1, p2 = 1, 1
+    for _ in range(n):
+        r.append(p1)
+        p1, p2 = p2, p1 + p2
+    return r[-1]
 
-class Graph:
-    def __init__(self, size):
-        self.SIZE = size
-        self.graph = [[0 for x in range(size)] for x in range(size)]
+print("## 피보나치 수 ##")
 
+for i in range(2, 20) :
+    print(fibo_recu(i), end=' ')
 
-def BFS(g):
-    # global queue, visited_array
-    queue = deque([])
-    visited_array = []
+print()
 
-    for i in range(g.SIZE):
-        for j in range(g.SIZE):
-            print(g.graph[i][j], end=' ')
-        print()
-
-    start = 0
-    queue.append(start)
-    visited_array.append(start)
-
-    while queue:
-        current = queue.popleft()
-        for vertex in range(g.SIZE):
-            if g.graph[current][vertex] == 1 and vertex not in visited_array:
-                queue.append(vertex)
-                visited_array.append(vertex)
-
-    for i in visited_array:
-        print(chr(ord('A') + i), end=' -> ')
-    print("END")
-
-
-g = None
-A, B, C, D, E, F, G, H, I = 0, 1, 2, 3, 4, 5, 6, 7, 8
-
-g1 = Graph(9)
-g1.graph[A][B] = 1; g1.graph[A][C] = 1; g1.graph[A][E] = 1
-g1.graph[B][A] = 1; g1.graph[B][C] = 1; g1.graph[B][D] = 1
-g1.graph[C][A] = 1; g1.graph[C][B] = 1; g1.graph[C][D] = 1; g1.graph[C][E] = 1; g1.graph[C][F] = 1
-g1.graph[D][B] = 1; g1.graph[D][C] = 1
-g1.graph[E][A] = 1; g1.graph[E][C] = 1; g1.graph[E][G] = 1; g1.graph[E][H] = 1
-g1.graph[F][C] = 1
-g1.graph[G][E] = 1; g1.graph[G][I] = 1
-g1.graph[H][E] = 1; g1.graph[H][I] = 1
-g1.graph[I][G] = 1; g1.graph[I][H] = 1
-
-g2 = Graph(4)
-g2.graph[A][C] = 1; g2.graph[A][D] = 1
-g2.graph[B][C] = 1
-g2.graph[C][A] = 1; g2.graph[C][B] = 1; g2.graph[C][D] = 1
-g2.graph[D][A] = 1; g2.graph[C][B] = 1
-
-BFS(g1)
-BFS(g2)
+for i in range(2,20):
+    print(fibo_iter(i), end = ' ')
