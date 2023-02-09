@@ -1,20 +1,21 @@
-import tkinter as tk
+def insertionSort(ary):
+    for end in range(1,len(ary)):
+        for cur in range(end, 0, -1):
+            if ary[cur-1][1] > ary[cur][1]:
+                ary[cur-1], ary[cur] = ary[cur], ary[cur-1]
+    return ary
 
-def Sierpinski(x,y,size):       #시작점의 위치와 한 변의 길이를 매개변수로 받아옴
-    if size >= 20:              # 한 변의 길이가 20보다 크다면
-        Sierpinski(x,y,size/2)  # 왼쪽 아래 작은 삼각형 재귀
-        Sierpinski(x+size/2,y,size/2) # 오른쪽 아래 작은 삼각형 재귀
-        Sierpinski(x+size/4, int(y-size*(3**0.5)/4), size/2) # 위쪽 작은 삼각형 재귀
-    else:                    #  다각형 그리기 => 세 꼭지점 지정,             채우기 색, 선 색 : 빨강"
-        canvas.create_polygon(x,y, x+size,y, x+size/2,y-size*(3**0.5)/2, fill='red', outline = 'red')
+def twobytwo(ary):
+    groub = list()
+    i = 0
+    while i < len(ary):
+        groub = ary[i][0],ary[i+1][0]
+        i += 2
+        print(f'{groub[0]} : {groub[1]}')
 
-wsize = 500   #화면크기
-
-window = tk.Tk() #창 생성
-window.title("Sierpinski") # 창 제목 생성
-canvas = tk.Canvas(window, height= wsize, width= wsize, bg = 'white')
-
-Sierpinski(wsize/5, wsize/5*4, wsize*2/3)
-
-canvas.pack()
-window.mainloop()
+data_array = [['선미',88], ['초아',99],['화사',71],['영탁',78],['영웅',67],['민호',92]]
+print(f'정렬 전 ---> {data_array}')
+sorted_array = insertionSort(data_array)
+print(f'정렬 후 ---> {sorted_array}' )
+print('## 성적별 조 편성표 ##')
+twobytwo(sorted_array)
