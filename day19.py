@@ -1,28 +1,31 @@
 import random
 
-def quickSort(ary):
-    global count
-    count = count + 1       #반복횟수 count
+def quickSort2(arr, start, end) :
+	if end <= start :
+		return
 
-    if len(ary) <= 1:       # 만약 배열의 길이가 1이하이면
-        return ary          # 배열 반환
+	low = start
+	high = end
 
-    pivot = ary[len(ary)//2]     # 기준은 배열의 중간 값
-    left_ary, right_ary, mid_ary = [],[],[]
+	pivot = arr[(low + high) // 2]
+	while low <= high :
+		while arr[low] < pivot :
+			low += 1
+		while arr[high] > pivot :
+			high -= 1
+		if low <= high :
+			arr[low], arr[high] = arr[high], arr[low]
+			low, high = low + 1, high - 1
 
-    for num in ary:         # 배열을 돌면서
-        if num < pivot:     # 기준 보다 작으면 왼쪽 배열에 추가
-            left_ary.append(num)
-        elif num > pivot:   # 기준 보다 크면 오른쪽 배열에 추가
-            right_ary.append(num)
-        else:               # 같으면 mid_arry
-            mid_ary.append(num)
+	mid = low
 
-    return quickSort(left_ary) + mid_ary + quickSort(right_ary) #재귀 함수 사용
+	quickSort2(arr, start, mid - 1)
+	quickSort2(arr, mid, end)
 
-count = 0
-data_array = [random.randint(0,200) for _ in range(20)]
 
-print(data_array)
-print(quickSort(data_array))
-print(count)
+dataAry = [random.randint(0,100) for _ in range(10)]
+
+
+print('정렬 전 -->', dataAry)
+quickSort2(dataAry,0,len(dataAry)-1)
+print('정렬 후 -->', dataAry)
