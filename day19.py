@@ -1,19 +1,13 @@
-def findInsertIdx(ary,data):
-    findIdx = -1
-    for i in range(0,len(ary)): # 배열의 처음부터 돌면서
-        if(ary[i]>data):        # 만약에 data보다 큰 값을 찾아
-            findIdx = i         # 삽입 위치를 찾음
-            break
-    if findIdx == -1:           # 만약 큰 값을 찾지 못했다면
-        return len(ary)         # 맨 뒷자리에 위치
-    else:
-        return findIdx
+import random
 
-test_array = [33,100,0,29,88]
-sorted_array = []
+def insertionSort(ary):
+    for end in range(1,len(ary)):  # 배열의 두번째 자리부터 돌면서
+        for current in range(end, 0, -1):   # 앞으로 한자리씩 이동하며
+            if (ary[current-1]>ary[current]): # 앞자리가 더 크다면 자리 변경
+                ary[current-1], ary[current] = ary[current], ary[current-1]
+    return ary
 
-for i in range(len(test_array)): # test_array를 처음부터 돌면서
-    data = test_array[i]         # data에 지정
-    ins_pos = findInsertIdx(sorted_array,data) # data의 위치를 찾고
-    sorted_array.insert(ins_pos,data) # 찾은 위치에 삽입
-print(sorted_array)
+before = [random.randint(0,100) for _ in range(10)]
+
+print(before)
+print(insertionSort(before))
