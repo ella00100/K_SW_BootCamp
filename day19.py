@@ -8,15 +8,17 @@ def quickSort(ary):
         return ary          # 배열 반환
 
     pivot = ary[len(ary)//2]     # 기준은 배열의 중간 값
-    left_ary, right_ary = [],[]
+    left_ary, right_ary, mid_ary = [],[],[]
 
     for num in ary:         # 배열을 돌면서
         if num < pivot:     # 기준 보다 작으면 왼쪽 배열에 추가
             left_ary.append(num)
         elif num > pivot:   # 기준 보다 크면 오른쪽 배열에 추가
             right_ary.append(num)
+        else:               # 같으면 mid_arry
+            mid_ary.append(num)
 
-    return quickSort(left_ary) + [pivot] + quickSort(right_ary) #재귀 함수 사용
+    return quickSort(left_ary) + mid_ary + quickSort(right_ary) #재귀 함수 사용
 
 count = 0
 data_array = [random.randint(0,200) for _ in range(20)]
