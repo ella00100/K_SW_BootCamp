@@ -1,20 +1,23 @@
 #3
-#40 40 40
+#336
+#222
+#625
+
 from sys import stdin
 
 n = int(stdin.readline())
-d_time = list(map(int,stdin.readline().split()))
-M_fee=Y_fee=0
+dice = [[] for _ in range(n)]
+price = []
 
-for time in d_time:
-    M_fee += (time//60 +1) * 15
-    Y_fee += (time//30 +1) * 10
+for i in range(n):
+    dice[i] = list(map(int, stdin.readline().split()))
+    if dice[i][0] == dice[i][1] == dice[i][2]:
+        price.append(10000+ dice[i][0]*1000)
+    elif dice[i][0] == dice[i][1] or dice[i][1] == dice[i][2] or dice[i][2] == dice[i][0]:
+        price.append(1000 + max(dice[i])*100)
+    else:
+        price.append(max(dice[i])*100)
 
-if M_fee < Y_fee:
-    print(f'M {M_fee}')
-elif M_fee > Y_fee:
-    print(f'Y {Y_fee}')
-else:
-    print(f'Y M {M_fee}')
+print(max(price))
 
 
