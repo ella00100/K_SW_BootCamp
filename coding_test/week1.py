@@ -1,23 +1,20 @@
-#3
-#336
-#222
-#625
-
+#2 3 5
+#1
 from sys import stdin
 
-n = int(stdin.readline())
-dice = [[] for _ in range(n)]
-price = []
+position = list(map(int, stdin.readline().split()))
+position.sort()
 
-for i in range(n):
-    dice[i] = list(map(int, stdin.readline().split()))
-    if dice[i][0] == dice[i][1] == dice[i][2]:
-        price.append(10000+ dice[i][0]*1000)
-    elif dice[i][0] == dice[i][1] or dice[i][1] == dice[i][2] or dice[i][2] == dice[i][0]:
-        price.append(1000 + max(dice[i])*100)
-    else:
-        price.append(max(dice[i])*100)
+move = 0
+while position[0] != position[1]-1 or position[1]+1 != position[2]:
+    if position[1]+1 < position[2]:
+        position[0] = position[2] - 1
+        position.sort()
+        move += 1
+    if position[0] < position[1]-1:
+        position[2] = position[0] + 1
+        position.sort()
+        move += 1
 
-print(max(price))
-
+print(move)
 
