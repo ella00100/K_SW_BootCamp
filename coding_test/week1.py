@@ -1,25 +1,19 @@
-#1-6방배정
-#남남/여여, 같은 학년
-#한방 최대인원 k
-#최소 방의 개수를 구해라
+#n개의 도시 - 일직선 상
+#기름 충전 - 도시마다 주유소 - 가격 다름
+
 
 from sys import stdin
 
-n, k = map(int,stdin.readline().split())
-group= [[0]*2 for _ in range(6)]
+n = int(stdin.readline())
+l = list(map(int,stdin.readline().split()))
+p = list(map(int,stdin.readline().split()))
 
-for i in range(n):
-    s,g = map(int,stdin.readline().split())
-    group[g-1][s-1] += 1
-    i += 1
+total = 0
+min_cost = p[0]
 
-room = 0
-for i in range(6):
-    for j in range(2):
-        if group[i][j]%k == 0:
-            room += group[i][j]//k
-        else:
-            room += (group[i][j]//k)+1
+for i in range(n-1):
+    if p[i] <= min_cost:
+        min_cost = p[i]
+    total += min_cost*l[i]
 
-print(room)
-
+print(total)
