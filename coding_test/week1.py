@@ -1,20 +1,25 @@
-#2 3 5
-#1
+#1-6방배정
+#남남/여여, 같은 학년
+#한방 최대인원 k
+#최소 방의 개수를 구해라
+
 from sys import stdin
 
-position = list(map(int, stdin.readline().split()))
-position.sort()
+n, k = map(int,stdin.readline().split())
+group= [[0]*2 for _ in range(6)]
 
-move = 0
-while position[0] != position[1]-1 or position[1]+1 != position[2]:
-    if position[1]+1 < position[2]:
-        position[0] = position[2] - 1
-        position.sort()
-        move += 1
-    if position[0] < position[1]-1:
-        position[2] = position[0] + 1
-        position.sort()
-        move += 1
+for i in range(n):
+    s,g = map(int,stdin.readline().split())
+    group[g-1][s-1] += 1
+    i += 1
 
-print(move)
+room = 0
+for i in range(6):
+    for j in range(2):
+        if group[i][j]%k == 0:
+            room += group[i][j]//k
+        else:
+            room += (group[i][j]//k)+1
+
+print(room)
 
