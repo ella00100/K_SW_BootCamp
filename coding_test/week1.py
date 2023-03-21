@@ -1,19 +1,24 @@
-#n개의 도시 - 일직선 상
-#기름 충전 - 도시마다 주유소 - 가격 다름
+#높이(번호)가 써진 막대기
+#입력된 순서대로 번호부여
 
 
 from sys import stdin
 
 n = int(stdin.readline())
-l = list(map(int,stdin.readline().split()))
-p = list(map(int,stdin.readline().split()))
+d = [[]for _ in range(n)]
+count = 1
 
-total = 0
-min_cost = p[0]
+for i in range(n):
+    d[i] = int(stdin.readline())
+
+#맨 뒤부터 크기가 그 전 막대가 작거나 같으면 안보임
+max_bar = d[-1]
 
 for i in range(n-1):
-    if p[i] <= min_cost:
-        min_cost = p[i]
-    total += min_cost*l[i]
+    if max_bar < d[-(i+2)]:
+        count += 1
+        max_bar = d[-(i+2)]
 
-print(total)
+print(count)
+
+
