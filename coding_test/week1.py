@@ -1,24 +1,19 @@
-#높이(번호)가 써진 막대기
-#입력된 순서대로 번호부여
-
-
 from sys import stdin
 
-n = int(stdin.readline())
-d = [[]for _ in range(n)]
-count = 1
+n, k = map(int, stdin.readline().split())
+st = []
+good = 0
 
 for i in range(n):
-    d[i] = int(stdin.readline())
+    name = input().strip()
+    st.append((i, len(name), name))
 
-#맨 뒤부터 크기가 그 전 막대가 작거나 같으면 안보임
-max_bar = d[-1]
+st.sort(key=lambda x: x[1])
 
 for i in range(n-1):
-    if max_bar < d[-(i+2)]:
-        count += 1
-        max_bar = d[-(i+2)]
-
-print(count)
-
-
+    idx = i+1
+    while idx < n and st[idx][1] == st[i][1]:
+        if st[idx][0] - st[i][0] <= k:
+            good += 1
+        idx += 1
+print(good)
