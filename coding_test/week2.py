@@ -1,12 +1,19 @@
 from sys import stdin
 
-n, k = map(int, stdin.readline().split())
-num = list(range(1, n+1))
-i = 0
-result = []
+n = int(input())
+count = 0
+stack = []
 
-while num:
-    i = (i + k - 1) % len(num)
-    result.append(num.pop(i))
+for _ in range(n):
+    stat = stdin.readline().strip()
+    stack.append(stat[0])
+    for c in stat[1:]:
+        if stack and stack[-1] == c:
+            stack.pop()
+        else:
+            stack.append(c)
+    if not stack:
+        count += 1
+    stack = []
 
-print('<' + ', '.join(map(str, result)) + '>')
+print(count)
