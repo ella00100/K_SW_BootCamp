@@ -1,43 +1,60 @@
-#섬의 개수
 import sys
+from collections import deque
+from copy import deepcopy
+
+input = sys.stdin.readline
 sys.setrecursionlimit(10000)
 
-def DFS(i, j, w, h, array, visited):
-    if visited[i][j]:
-        return 0
-    if array[i][j]:
-        return 0
+w, h = map(int, input().split())
+array = []
 
-    visited[i][j] = True
-    for dx, dy in [[-1,-1], [-1,0], [-1,1],
-                   [0,-1], [0,1],
-                   [1,-1], [1,0], [1,1]]:
-        nx = i + dx
-        ny = j + dy
+for _ in range(w):
+    array.append(list(map(int, input().split())))
 
-        if 0<= nx < h and 0 <= ny < w:
-            if array[nx][ny] == 1:
-                DFS(nx, ny, w, h, array, visited)
+def build_wall(count):
+    global ans
 
-    return 1
+    if count == 3:
+        bfs(deepcopy(array))
+        return
 
-def solution(w, h, array):
-    answer = 0
-    visited =[[False]*w for _ in range(h)]
-    for i in range(h):
-        for j in range(w):
-            if not visited[i][j]:
-                answer = answer + DFS(i, j, w, h, array, visited)
+    for i in range(w):
+        for j in range(h):
+            if array[i][j] == 0:
+                array[i][j] = 1
+                build_wall(count + 1)
+                array[i][j] = 0
 
-    return answer
+def bfs(array):
+    global ans
 
-while True:
-    w, h = map(int, input().split())
-    if w == h == 0:
-        break
-    array = []
-    for _ in range(h):
-        array.append(list(map(int, input().split())))
+    virus = deepcopy(array)
 
-    answer = solution(w, h, array)
-    print(answer)
+    queue = deque()
+
+    for i in range(w):
+        for j in range(h):
+            if virus[i][j] == 2:
+                queue.append((i, j))
+
+    while queue:
+        x, y = queue.popleft()
+        for dx, dy in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
+            nx = x + dx
+            ny = y + dy
+            if 0 <= nx < w and 0 <= ny < h:
+                if virus[nx][ny] == 0:
+                    virus[nx][ny] = 2
+                    queue.append((nx, ny))
+
+    count = 0
+    for i in range(w):
+        for j in range(h):
+            if virus[i][j] == 0:
+                count += 1
+
+    ans = max(ans, count)
+
+ans = 0
+build_wall(0)
+print(ans)
