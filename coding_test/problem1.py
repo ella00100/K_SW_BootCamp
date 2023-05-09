@@ -8,7 +8,7 @@ def dfs(x, y, visited):
             dfs(nx, ny, visited)
 
 t = int(input())
-for i in range(t):
+for _ in range(t):
     n, m = map(int, input().split())
     cube = [list(map(int, stdin.readline().split())) for _ in range(n)]
 
