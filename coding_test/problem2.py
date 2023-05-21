@@ -1,43 +1,21 @@
-from collections import defaultdict
 
-def dfs(graph, start):
-    stack = [(start, [start])]
-    visited = set()
+import sys
 
-    while stack:
-        (vertex, path) = stack.pop()
-        if vertex not in visited:
-            if len(path) == len(graph):
-                return path
-            visited.add(vertex)
-            for neighbor in graph[vertex]:
-                if neighbor not in path:
-                    stack.append((neighbor, path + [neighbor]))
+def find_best_route(route_a, route_b):
+    a_dict = {address: idx for idx, address in enumerate(route_a)}
+    b_dict = {address: idx for idx, address in enumerate(route_b)}
+    overlap = set(a_dict.keys()) & set(b_dict.keys())
+    overlap = list(overlap)
+    overlap.sort(key=lambda x: (a_dict[x], b_dict[x]))
+    return overlap
 
-    return []
+# 입력 처리
+t = int(sys.stdin.readline().strip())
 
-m = int(input())
-for _ in range(m):
-    A_addr = input().split()[1:]
-    B_addr = input().split()[1:]
+for _ in range(t):
+    na, *route_a = map(str, sys.stdin.readline().split())
+    nb, *route_b = map(str, sys.stdin.readline().split())
 
-    graph = defaultdict(list)
-    for i in range(len(A_addr)-1):
-        if A_addr[i+1] == A_addr[i]:
-            continue
-        graph[A_addr[i]].append(A_addr[i+1])
-        graph[A_addr[i+1]].append(A_addr[i])
-
-    common_path = []
-    for i in range(len(B_addr)-1):
-        if B_addr[i+1] == B_addr[i]:
-            continue
-        path = dfs(graph, B_addr[i])
-        if B_addr[i+1] in path:
-            common_path.extend(path[path.index(B_addr[i]):path.index(B_addr[i+1])+1])
-
-    common_set = set(common_path)
-    common = list(common_set)
-    common.sort()
-
-    print(len(common))
+    # 최적 경로 찾기
+    overlap = find_best_route(route_a, route_b)
+    print(len(overlap))
