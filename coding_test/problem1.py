@@ -10,14 +10,18 @@ def dfs(x, y, visited):
 t = int(input())
 for _ in range(t):
     n, m = map(int, input().split())
-    cube = [list(map(int, stdin.readline().split())) for _ in range(n)]
-
+    cube = []
+    while True:
+        line = stdin.readline().strip()
+        if line:
+            row = list(map(int, line.split()))
+            cube.append(row)
+        else:
+            break
     visited = [[False] * m for _ in range(n)]
     dfs(0, 0, visited)
 
     if visited[0][0] and visited[n-1][m-1]:
-        print()
         print(1)
     else:
-        print()
         print(0)
