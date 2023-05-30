@@ -14,6 +14,7 @@ for _ in range(t):
 
     visited = [[False] * m for _ in range(n)]
     dfs(0, 0, visited)
+
     if visited[0][0] and visited[n-1][m-1]:
         print(1)
     else:

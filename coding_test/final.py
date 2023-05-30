@@ -27,6 +27,7 @@ for i in range(1, n+1):
     if count > max_count:
         max_count = count
         treated_fish = [i]
-    elif count == max_count:
+
+    elif count == max_count: #치료가능 개수 똑같으면 여러개 출력
         treated_fish.append(i)
 print(*treated_fish)

@@ -1,6 +1,5 @@
 from sys import stdin
 
-
 def bfs(start, end, graph):
     visited = set([start])
     queue = [start]
@@ -26,7 +25,7 @@ def bfs(start, end, graph):
 
 
 m = int(input())
-
+results = []
 for _ in range(m):
     n = int(input())
     friend = {i: set() for i in range(1, n+1)}
@@ -39,6 +38,7 @@ for _ in range(m):
             friend[j].add(i)
     a, b = map(int, input().split())
     result = bfs(a, b, friend)
-    print(result)
+    results.append(result)
 
-
+for i in range(len(results)):
+    print(results[i])
