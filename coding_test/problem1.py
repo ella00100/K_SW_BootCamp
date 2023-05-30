@@ -16,6 +16,8 @@ for _ in range(t):
     dfs(0, 0, visited)
 
     if visited[0][0] and visited[n-1][m-1]:
+        print()
         print(1)
     else:
+        print()
         print(0)
